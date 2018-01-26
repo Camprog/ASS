@@ -1,0 +1,6 @@
+# Lib requirements
+
+beautifulsoup4
+requests
+
+# File requirements
