@@ -1,6 +1,6 @@
 # Scrap Jasss with Python
 
-Open source python utility to scrap and analyse articles published in [jasss][JASSS]
+Open source python utility to scrap and analyse articles published in [JASSS][jasss]
 
 <!--
 ## Usage
@@ -15,8 +15,8 @@ $ DO SOMETHING
 
 ## Features
 
-* Is able to scrap any number of articles from the journal using [beautifulsoup4][BeautifulSoup]
-* Basic text mining capabilities using [nltk][NLTK] that allow to further enhance articles reading
+* Is able to scrap any number of articles from the journal using [beautifulsoup4]
+* Basic text mining capabilities using [NLTK][NLTK] that allow to further enhance articles reading
 
 ## Todo
 
