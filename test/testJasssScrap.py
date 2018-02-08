@@ -1,13 +1,11 @@
-from sample import jasssScrap
-from bs4 import BeautifulSoup
-
-soup = BeautifulSoup(jasssScrap.visit_article(1, 1, 1), 'html5lib')
+import JasssArticle
 
 # print(soup.prettify())
-
-title = jasssScrap.get_title(soup)
-key_worlds = jasssScrap.get_key_worlds(soup)
-authors = jasssScrap.get_authors(soup)
-
-print("The first published article in JASSS was: " + title + "\n" + "The key words was: " + str(
-    key_worlds) + "\n" + "And authors was: " + str(authors))
+for article in range(1, 7):
+    the_article = JasssArticle(article=article)
+    title = the_article.get_title()
+    key_worlds = the_article.get_key_worlds()
+    authors = the_article.get_authors()
+    abstract = the_article.get_abstract()
+    print("The first published article in JASSS was: " + title + "\n" + "The key words was: " + str(
+        key_worlds) + "\n" + "And authors was: " + str(authors) + "\n" + "Abstract: " + abstract + "\n")
