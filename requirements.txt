@@ -1,6 +1,8 @@
+sample
 # Lib requirements
 
 beautifulsoup4
 requests
+itertools
 
 # File requirements

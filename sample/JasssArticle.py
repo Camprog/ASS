@@ -1,4 +1,4 @@
-import jasssScrap
+from sample import jasssScrap
 import requests
 from bs4 import BeautifulSoup
 
@@ -9,7 +9,7 @@ class JasssArticle:
         """init article from JASSS based on the value of volume, number and article
 
         :param int volume:
-        :param int number:
+        :param int issue:
         :param int article:
         """
         basic_url = jasssScrap.base_url + str(volume) + jasssScrap.separator + str(issue) + jasssScrap.separator

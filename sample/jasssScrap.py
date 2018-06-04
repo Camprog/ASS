@@ -1,5 +1,5 @@
 from sample import JasssArticle
-import itertools
+from itertools import product
 
 base_url = "http://jasss.soc.surrey.ac.uk/"
 separator = '/'
@@ -36,5 +36,5 @@ def visit_articles(to_volume=1, to_number=4, to_article=1):
     :return: a tuple made of html pages
     """
     return [visit_article(x, y, z) for x, y, z in
-            itertools.product(range(to_volume), range(to_number), range(to_article))]
+            product(range(to_volume), range(to_number), range(to_article))]
 
