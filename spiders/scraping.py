@@ -11,6 +11,7 @@ from scrapy.utils.project import get_project_settings
 
 class WebScraping(scrapy.Spider):
     name = "scraping"
+    start_urls = ['http://jasss.soc.surrey.ac.uk/index_by_issue.html', 'https://www.comses.net/codebases/']
     le1 = LinkExtractor(canonicalize=True, unique=False, allow=('https://www.comses.net/codebases/', 'http://jasss.soc'
                                                                                                      '.surrey.ac.uk/'),
                         deny=('/?tags'))
@@ -26,16 +27,13 @@ class WebScraping(scrapy.Spider):
         #dict to storage url + title
         self.a = "agent-based"
         self.items = dict()
-        self.start_urls = ['http://jasss.soc.surrey.ac.uk/index_by_issue.html', 'https://www.comses.net/codebases/']
-        return self.start_urls
-        print(self.start_urls)
 
         """Give Domain with URL"""
-        parsed_uri = urlparse(self.start_urls[1])
+        parsed_uri = urlparse(WebScraping.start_urls[1])
         self.domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
         print(self.domain)
 
-        for url in self.start_urls:
+        for url in WebScraping.start_urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
     # the response containing a HTML form
