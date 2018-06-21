@@ -11,10 +11,10 @@ from scrapy.utils.project import get_project_settings
 
 class WebScraping(scrapy.Spider):
     name = "scraping"
-    start_urls = ['http://jasss.soc.surrey.ac.uk/index_by_issue.html', 'https://www.comses.net/codebases/']
+    start_urls = ['http://jasss.soc.surrey.ac.uk/index_by_issue.html']
+
     le1 = LinkExtractor(canonicalize=True, unique=False, allow=('https://www.comses.net/codebases/', 'http://jasss.soc'
-                                                                                                     '.surrey.ac.uk/'),
-                        deny=('/?tags'))
+                                                                                                     '.surrey.ac.uk/'))
     rules = [
         Rule(
             le1,
@@ -24,14 +24,15 @@ class WebScraping(scrapy.Spider):
     ]
 
     def start_requests(self):
-        #dict to storage url + title
-        self.a = "agent-based"
+        self.a=""
         self.items = dict()
 
         """Give Domain with URL"""
+        """
         parsed_uri = urlparse(WebScraping.start_urls[1])
         self.domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
         print(self.domain)
+        """
 
         for url in WebScraping.start_urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -40,12 +41,18 @@ class WebScraping(scrapy.Spider):
     def parse(self, response):
         #extract data from every links
         links = self.le1.extract_links(response)
-        for link in links:
-            # print(link.url, link.text)
-            """ match URL with title and put them in a dict"""
-            if self.a in link.text.lower():
-                self.items[link.url] = link.text
-                print(link.text, link.url)
+
+        body = input("d to do a deeper search, enter to a normal scan :")
+
+        if body == "d":
+            print(response.xpath('//body//p//text()').extract())
+        else:
+            for link in links:
+                # print(link.url, link.text)
+                """ match URL with title and put them in a dict"""
+                if self.a in link.text.lower():
+                    self.items[link.url] = link.text
+                    print(link.text, link.url)
 
         # follow next page
         try:
@@ -62,17 +69,25 @@ class WebScraping(scrapy.Spider):
     def AddIndex(self, Newindex):
         print (self.start_urls)
         self.start_urls.append(Newindex)
-        print(self.start_urls)
         return self.start_urls
+
 
 #Launch spider
 if __name__ == "__main__":
-    Scrap = WebScraping()
-    Scrap.AddIndex("http://journals.plos.org/plosone/")
+
+    process = CrawlerProcess()
+    process.crawl(WebScraping)
+    process.start()
 
     """
-    WebScrapping.AddIndex()
-    process = CrawlerProcess()
-    process.crawl(WebScrapping)
-    process.start()
+    liste des index
+    'http://journals.plos.org/plosone/'
+    'http://jasss.soc.surrey.ac.uk/index_by_issue.html'
+    'https://www.comses.net/codebases/'
     """
+"""
+    Scrap = WebScraping()
+    Scrap.AddIndex('https://www.comses.net/codebases/')
+"""
+
+
