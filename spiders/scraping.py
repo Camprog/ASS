@@ -11,10 +11,9 @@ from scrapy.utils.project import get_project_settings
 
 class WebScraping(scrapy.Spider):
     name = "scraping"
-    start_urls = ['http://jasss.soc.surrey.ac.uk/index_by_issue.html']
+    start_urls = ['http://jasss.soc.surrey.ac.uk/index_by_issue.html','https://www.comses.net/codebases/']
 
-    le1 = LinkExtractor(canonicalize=True, unique=False, allow=('https://www.comses.net/codebases/', 'http://jasss.soc'
-                                                                                                     '.surrey.ac.uk/'))
+    le1 = LinkExtractor(canonicalize=True, unique=False)
     rules = [
         Rule(
             le1,
@@ -26,13 +25,16 @@ class WebScraping(scrapy.Spider):
     def start_requests(self):
         self.a=""
         self.items = dict()
+        print (self.start_urls)
+
+        url = input ("Index, enter n° : ")
+        self.start_urls = self.start_urls[int(url)-1]
+
 
         """Give Domain with URL"""
-        """
-        parsed_uri = urlparse(WebScraping.start_urls[1])
-        self.domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
-        print(self.domain)
-        """
+        parsed_uri = urlparse(self.start_urls)
+        self.domain=parsed_uri.netloc
+
 
         for url in WebScraping.start_urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -45,7 +47,9 @@ class WebScraping(scrapy.Spider):
         body = input("d to do a deeper search, enter to a normal scan :")
 
         if body == "d":
-            print(response.xpath('//body//p//text()').extract())
+            """Body of article content"""
+            for link in links:
+                print(response.xpath('//body//div//text()').extract())
         else:
             for link in links:
                 # print(link.url, link.text)
@@ -58,6 +62,8 @@ class WebScraping(scrapy.Spider):
         try:
             #this response use css, only for comses.net
             next_page = response.css('li.page-item a::attr("href")').extract()[-1]
+            #next_page = response.css('a.pagi-suivant-actif a::attr("href")').extract()[-1]
+
             if next_page:
                 # print(next_page)
                 next_page = self.domain + next_page
@@ -74,6 +80,12 @@ class WebScraping(scrapy.Spider):
 
 #Launch spider
 if __name__ == "__main__":
+    """Add an index in list"""
+
+
+    A = WebScraping()
+    A.AddIndex('http://www.jeuxvideo.com/forums/0-51-0-1-0-1-0-blabla-18-25-ans.htm')
+
 
     process = CrawlerProcess()
     process.crawl(WebScraping)
@@ -81,13 +93,9 @@ if __name__ == "__main__":
 
     """
     liste des index
-    'http://journals.plos.org/plosone/'
     'http://jasss.soc.surrey.ac.uk/index_by_issue.html'
     'https://www.comses.net/codebases/'
     """
-"""
-    Scrap = WebScraping()
-    Scrap.AddIndex('https://www.comses.net/codebases/')
-"""
+
 
 
