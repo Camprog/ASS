@@ -4,6 +4,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import Rule, CrawlSpider
 from urllib.parse import urlparse
 from scrapy.utils.project import get_project_settings
+from scrapy.selector import HtmlXPathSelector
 
 # install pywin32
 # CD .\spiders
@@ -11,7 +12,7 @@ from scrapy.utils.project import get_project_settings
 
 class WebScraping(scrapy.Spider):
     name = "scraping"
-    start_urls = ['http://jasss.soc.surrey.ac.uk/index_by_issue.html','https://www.comses.net/codebases/']
+    start_urls = ['http://jasss.soc.surrey.ac.uk/index_by_issue.html','https://www.comses.net/codebases/', 'http://www.jeuxvideo.com/sorties/dates-de-sortie.htm', 'https://myanimelist.net/topmanga.php']
 
     le1 = LinkExtractor(canonicalize=True, unique=False)
     rules = [
@@ -22,80 +23,81 @@ class WebScraping(scrapy.Spider):
         )
     ]
 
+    def __init__(self, keyword, search):
+        self.keyword = keyword
+        self.search=search
+
+
     def start_requests(self):
-        self.a=""
+        print(self.start_urls)
         self.items = dict()
-        print (self.start_urls)
-
         url = input ("Index, enter n° : ")
-        self.start_urls = self.start_urls[int(url)-1]
-
+        self.start_urls = self.start_urls[int(url)]
 
         """Give Domain with URL"""
         parsed_uri = urlparse(self.start_urls)
-        self.domain=parsed_uri.netloc
+        self.domain = parsed_uri.netloc
 
-
-        for url in WebScraping.start_urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+        yield scrapy.Request(url=self.start_urls, callback=self.parse)
 
     # the response containing a HTML form
     def parse(self, response):
-        #extract data from every links
+        # extract data from every links
         links = self.le1.extract_links(response)
 
-        body = input("d to do a deeper search, enter to a normal scan :")
-
-        if body == "d":
+        if self.search == "deep":
             """Body of article content"""
             for link in links:
-                print(response.xpath('//body//div//text()').extract())
+                self.items['content'] = response.xpath('//body//p//text()').extract()
+                print(self.items['content'])
+
+
+
         else:
             for link in links:
                 # print(link.url, link.text)
                 """ match URL with title and put them in a dict"""
-                if self.a in link.text.lower():
-                    self.items[link.url] = link.text
-                    print(link.text, link.url)
+                if self.keyword in link.text.lower():
+                    self.items[link.url] = link.title
+                    print(link.title, link.url)
 
         # follow next page
         try:
-            #this response use css, only for comses.net
+            #this response use css, only for comses.net /// Change page-item to adapt
             next_page = response.css('li.page-item a::attr("href")').extract()[-1]
-            #next_page = response.css('a.pagi-suivant-actif a::attr("href")').extract()[-1]
-
+            #next_page = response.xpath('').extract()
+            #next_page = response.css('div.pagi-suivant-actif a::attr("href")').extract()[-1]
+            print(next_page)
             if next_page:
-                # print(next_page)
-                next_page = self.domain + next_page
+                next_page = "https://" + self.domain + next_page
+                print(next_page)
                 yield response.follow(next_page, self.parse)
         except:
             print("there isn't other page")
 
 
     def AddIndex(self, Newindex):
-        print (self.start_urls)
         self.start_urls.append(Newindex)
         return self.start_urls
 
 
 #Launch spider
 if __name__ == "__main__":
-    """Add an index in list"""
-
-
-    A = WebScraping()
-    A.AddIndex('http://www.jeuxvideo.com/forums/0-51-0-1-0-1-0-blabla-18-25-ans.htm')
-
 
     process = CrawlerProcess()
-    process.crawl(WebScraping)
+    """keyword to do a keyword search,search=deep to a deep search"""
+    process.crawl(WebScraping,keyword="", search="deep")
     process.start()
 
-    """
-    liste des index
-    'http://jasss.soc.surrey.ac.uk/index_by_issue.html'
-    'https://www.comses.net/codebases/'
-    """
+
+
+    """Add an index in list"""
+"""
+    A = WebScraping()
+    A.AddIndex('http://www.jeuxvideo.com/sorties/dates-de-sortie.htm')
+"""
+
+
 
 
 
