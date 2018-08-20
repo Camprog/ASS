@@ -11,4 +11,6 @@ class WebscrapingItem(scrapy.Item):
     # define the fields for your item here like:
     url = scrapy.Field()
     text = scrapy.Field()
+    keyword = scrapy.Field()
+    content = scrapy.Field()
     pass

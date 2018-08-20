@@ -1,0 +1,577 @@
+Powerful nations rise and fall, many nations today did not exist 75 years ago. What allows a nation or empire to rise to power? We build upon Kennedy’s (1989) analysis of this question by empirically modeling the link between political agreements, wealth, and war. A nation, through networks of political affiliation or lack thereof, can secure its position in the world as a superpower or fall into chaos and collapse. Most and Star (1984) argue that countries can select and utilize various policy options to their advantage, depending on the problems they face. In this paper, we examine outcomes that arise from the networks of formal defense agreements. These agreements are one type of foreign policy option that countries often use to gain prominence and protection on the global scene.
+
+1.2In this paper, we focus specifically on how defense agreements serve as a foreign policy tool to garner protection and tribute. We employ the Correlates of War (CoW) dataset to provide historical data of formal defense agreements since 1945 (Gibler 2009). In the tradition of Cusack and Stoll (1990), we use computer simulation to investigate outcomes of international systems, specifically agreements and conflict. By constructing an agent-based model that builds upon Axelrod’s Tribute model (Gilbert and Conte 1995), we examine how formal defense agreements and alliances shape the success and failure of various countries. This analysis is based on Schelling’s (1960) foundational work that finds that the threat of retaliation can be more effective than a single country’s defense capabilities. We investigate how much defense alliances play into this retaliation threat dynamic.
+
+1.3Axelrod’s original model began with ten actors arranged on a line whose ends meet to form a circle so each actor would only have one neighbor on each side. Political power would grow and diminish as the neighbors next to each actor interacted. Our network model moves beyond simply trying to understand the emergence of higher-level coordination from the elementary interactions of the lower level agents. We take the existing networks and wealth of countries and treat them as having already emerged. In the framework of our tribute model, we use this information to simulate interactions between countries.
+
+1.4Agent-based modeling has previously been used for this type of alliance examination (Cederman 2003; Cederman and Girardin 2007; Bennett and Stam 2000). We build upon this literature, and Kennedy’s (1989) work on the capacity of countries to sustain war, by taking the empirical Correlates of War data as the initial conditions of defense agreements, running our model forward, and examining which countries become dominant through their ability to produce and extract wealth. We set four years as initial conditions, 1945, 1960, 1980, and 2007. Our model employs historical data to simulate similar decision-making conditions. Cederman and Girardin (2007) employ empirical data to simulate local conflicts. They integrate GIS data with computational models to analyze civil wars. Our model makes a similar contribution on an international level. We identify the emergence of patterns of international conflicts and distributions of power. Our paper makes a contribution to the conflict dynamics and resolution literature using a methodology that is informed by agent-based modeling[1] and the economic analysis of conflict[2].
+
+1.5Section 2 provides the theoretical basis on which our model stands. Our model, methods, and data are laid out in Section 3. The results and conclusions from our agent-based model are shown and discussed in Section 4.
+Theory
+
+2.1Jouvenel (1963), in Pure Theory of Politics, introduces the problem of political exchange and reciprocation. At its root, politics is the art of moving “other men in pursuit of some design cherished by the mover” (Jouvenel 1963, 38). Agent A suggests some action H by agent B. Agent A may promise agent B gain for cooperation, penalty for defiance, or both. The principle extends to foreign policy where state power is exercised against other states through various channels. Morgan and Palmer (2003) show that foreign policy is goal directed, either to accomplish a certain task or destroy a particular state. Alliances involve “both costs and benefits, and the only alliances we observe are those in which the benefits outweigh the costs” (Morgan and Palmer 2003, 200). Costs and benefits that govern diplomatic outcomes are those born and received by political decision-makers: those who have influence over the evolution of society’s power structure (Wagner 2016; Salter and Wagner 2018). Depending on a nation’s institutional arrangement, political decisions may or may not lead to desirable outcomes for the public. We integrate this understanding at a high level, considering states to make decisions in light of costs and benefits of war. While tension of internal social and institutional dynamics may not always lead to the welfare maximizing outcome (Arrow 1950; Buchanan 1954; Boettke and Leeson 2002; Caplan 2011; Decanio 2014), deal-making within democracy can move society closer to this outcome (Buchanan and Tullock 1962; Wittman 1989, 1995). To account for generally imperfect rationality among actors, we include a random parameter that influences the efficiency of democratic decision-making in its decision to war.
+
+2.2In economic interactions two agents engage in exchange because both parties expect to realize a state superior to the one that would arise absent exchange (Menger 1983). This requires that agents, as legal persons, are not so inequitable that one can, owing to a privileged position, use force or the institutions of force to manipulate the terms of exchange to benefit himself at the cost of another agent. This is not the historical norm. For most of human history, the Hobbesian “natural state” embodied the dominant form of political relationships[3]. Even when the “natural state” is superseded by robust institutions of governance, relationships between agents of different states are prima facie exposed to the risk of poorly constrained violence. In the “natural state”, whether domestic or international, asymmetries in power allow a stronger agent to employ force or the threat of force as a tool to transform his relationships with other agents. The weaker agent, sensing a threat, may choose to cooperate under such circumstances (Buchanan 1985, 68-69). Alliances that embody substantial political inequity, are the fruit of this type of power relationship. They can breed the discontent that gives rise to future conflicts (Benson 2011). In this anarchic world, peace and security are especially rare.
+
+2.3We generalize this sort of behavior with a derivation of a game of war. Table 1 demonstrates the payoffs for this scenario. Given the payouts in Table 1, both agents will typically be incentivized to avoid conflict. There are cases where either agent might not avoid conflict; these include games where payouts for engaging in conflict differ between agents. Imagine that agent A is substantially stronger than agent B and that the rule of law is not firmly established. Agent A might destroy agent B. More likely agent A will promise not to harm agent B. Instead, agent A proposes to agent B “something similar to the slave contract, in which the ‘weak’ agree to produce goods for the ‘strong’ in exchange for being allowed to retain something over and above bare subsistence (Buchanan 1975, 78).” Agent A may offer to agent B the opportunity to keep a portion of his income by a formal agreement.
+Table 1: Game Theoretic Payoffs for Agents of Equal Strength 		B	
+		Altruism	Fight
+A	Altruism	a, a	-b, b
+	Fight	b, -b	-c, -c
+
+2.4In their analysis of the development and constraint of state power, North, Wallis, and Weingast (2009) describe the emergence of early forms of political organization. Development begins from “the natural state.”
+
+    ”The natural state reduces the problem of endemic violence through the formation of a dominant coalition whose members possess special privileges. The logic of the natural state follows from how it solves the problem of violence. Elites – members of the dominant coalition – agree to respect each other’s privileges, including property rights and access to resources and activities. By limiting access to these privileges to members of the dominant coalition, elites create credible incentives to cooperate rather than fight among themselves. Because elites know that violence will reduce their own rents, they have incentives not to fight. Furthermore, each elite understands that other elites face similar incentives. In this way, the political system of a natural state manipulates the economic system to produce rents that then secure political order. (North et. al. 2009, 18).”
+
+2.5From this process arises a system of government that maintains a monopoly on the use of force. This logic can be extended to the formation of international order. Agents on both sides who influence government recognize that they will be better off if both governments reach an agreement with one another, which will constrain the use of force in their interactions (Olson 1965).
+
+2.6The scenario we have described is the starting point from which agreements between governments must emerge. Interaction between agents from different nations includes a peculiar problem that is not present among interactions within a nation. Besley and Persson (2008) find that external war typically leads to much larger investments in fiscal capacity than do civil wars. In nations where the rule of law has reached an appreciable level of maturity, the position of any two agents in the legal system is much closer to equality than in a system where the rule of law is absent, thus reducing costs that arise due to legal uncertainty (Hayek 2010). The formation of legal equality promotes predictability within the system as agents can not only form expectations about the governing system’s response to their own actions, but also its response to the actions of other agents (Koppl 2002). Under the rule of law, an agent can expect that the legal system will respond symmetrically and, by implication, predictably to his own action as it would to the same action taken by any other agent (Hayek 1982, 112-13).
+
+2.7In order for the rule of law to extend beyond a single nation, whether in piecemeal or in whole, different nations must form enforceable agreements with one another. These agreements can also manifest themselves in common institutions as the “institutional arrangements of political systems influence the incentives of leaders to provide different kinds of policies” (Bueno de Mesquita et al. 1999, 41). Countries with similar institutions, democracies for example, interact differently and often times more cordially with each other than they do with autocracies. Discrepancies in the power of nations will play a significant role in determining the extent to which the rule of law plays a role in international relations. Alliances may also be used as a tool of increased control for the stronger party. Given power asymmetries between nations, Benson’s (2011) findings that alliance formation can even create incentives for alliance members to initiate and perpetuate conflict are unsurprising. Our model integrates these attribute of alliances in their willingness to respond to conflict.
+Model
+
+3.1This section provides a description of our Network Tribute model as well as a background on the data and methods used to conduct our analysis.
+
+3.2We identify our agent as the nation-state. In doing this, we assume an equilibrium condition within political markets in each state. Each agent involved in enacting state policy knows the expected costs and benefits of the potential action and chooses their most preferred option. We allow for inefficiencies in collective decision-making to arise and test the effects of such a systematic deficiency (Arrow 1950).
+
+3.3The process of becoming an active agent who has the potential to go to war is random. At the core of the model, the decision of whether to attack or not and the decision to attack certain countries or not, however, is strategically calculated. Activated agents make their decisions whether or not to threaten another country by the potential amount of tribute they can garner from their threat. Countries do not threaten their allies. They engage in a cost benefit analysis for each decision. These decisions are much like the decisions modeled in Cederman’s model (2003). He poses that due to increased globalization and technological advancements, stochastic decisions to wage war are based on the specific contexts, costs, and benefits. Agent utility is based on accumulated wealth, and their foreign policy decisions are based upon future expected utility (Bennett and Stam 2000). Deviations from this norm are dependent upon the efficiency of collective decision-making.
+
+3.4As the model runs, agreements between countries are created and are strengthened or weakened based upon the interactions of the actors. In our model, agents are nodes that comprise an existing network of countries. These actors may or may not have connections to other countries. Although this model can be run on any variety of simulated networks, the analysis of this paper is concerned with the dynamics of specific real-world networks drawn from certain points in time.
+
+3.5The data used for our global network model experiments come from the Correlates of War Project. The networks for the countries are created using data on formal defense alliances, where one state has signed a defense pact to protect another (Gibler 2009). These defense networks convey information about the structure of global relationships as they represent a high level of commitment to another country. They are directed connections that represent an explicit public promise that one country will commit some level of resources to another country should they come under attack. The Network Tribute model takes the formal defense alliance networks of years 1945, 1960, 1980 and 2007 and treats them as having already emerged from the previous interactions of the individual countries. These years were chosen because they allow us to compare model results from time periods before during and after the cold war, a time of international tumult. In the model, alliances are preexisting conditions that are taken as given and are fixed as the simulation is run forward each time.
+
+3.6New links between previously unlinked countries arise when one country pays tribute to another country. These new links do not represent formal defense agreements. They represent a “non-aggression” agreement between the two countries. They signify that neither country, should they become active again, will target the other in the future. They do not represent a promise to commit any resources to another county in the future.
+
+3.7The CoW project has detailed data on the national material capabilities of countries throughout much of the 20th century. In the globalized model, each country is instantiated with a proxy for wealth that is based on data for that country in that year. We use CoW data on yearly steel production are used as a proxy for wealth. One might argue that certain countries, Japan in particular, did not have adequate steel production of their own to sustain their growing army in the 1920s-1940s. Although this is true, Japan did have three principal mines in the early 1900s that provided an ample amount of iron and steel to the country (Journal of the Royal Society of Arts 1908). As Berglund (1922) states, “the iron and steel industry of Japan is closely bound up with that country’s continental policies. Military power is dependent upon this industry, the political situation in the Orient will be better appreciated as the conditions governing Japan’s iron and steel industry are understood (Berglund 1922, 623).” Iron and steel production is closely linked with levels of industrial activity. This measure provides a valuable proxy for military potential (Rogers 1948, 41; Inwood and Keay 2013, 1265; Shone and Fisher 1958; Wayman, Singer and Goertz 1983) [4]. Production of steel is required to fight wars and sustain infrastructure for a modern society. Trade during, before, and after war is crucial to military success, however a country’s own iron and steel production indicates its ability to acquire this significant input independently during a time of war (Birkett 1920, 353; Zimmern 1918, 7-10).
+
+3.8Previous models have used arbitrary thresholds for when actors are to become active during a simulation. Some literature suggests that the frequency of wars worldwide has been increasing since 1870, due to economic globalization and democratization (Harrison and Wolf 2012, 1055). In order to define a year in our model we look to the CoW Militarized Interstate Dispute data (Palmer et al. 2015). The average number of disputes in the four years considered in this model was calculated at 23.25 disputes, Table 2 shows the number of disputes each year. Therefore, in our globalized model, 23 countries are asked to become active each year. These active agents could potentially enter into a conflict. The selection of the countries to become active is random.
+Table 2: Number of Global Disputes Each Selected Year Year	Number of Disputes
+1945	14
+1960	30
+1980	30
+2007	19
+Average	23.25
+
+3.9In our model, there are two parameters that may be chosen by the modeler. The experiments for our model include a parameter sweep of the tribute rate as well as the cost efficiency of democratic decision-making. The tribute payment is a parameter that can be modified to see the effect that various levels of tribute have on the outcome of the model. The democratic efficiency parameter adds the notion of irrationality to the model.
+Agent decision-making and interaction
+
+3.10An active country must decide whom to target and it does this by assessing a possible target’s vulnerability and multiplying it by their possible tribute payment. The greater the costs of tribute, the more likely a threatened country will choose to fight. Vulnerability is defined by Axelrod according to the following formula:
+Vulnerability of a Possible Target (with no allies)=WA-WTWA
+
+3.11Where WA and WT are the wealth of the active actor and the target, respectively. In order to take into account the networks of targeted countries we need to add a term to this formula that will allow the Active Country to incorporate this information. This term is called ACT and it represents the weighted wealth contribution of all countries that have a link to the targeted country. Only countries that have a network will calculate the modified vulnerability calculation:
+Vulnerability of Possible Target (with allies)=WA-(WT+ACT)WA
+
+3.12The ACT term is calculated by each actor in the defense network of a targeted country. Each country in the defense network multiplies the alliance strength it has with the targeted country by its own wealth. This is the amount that each country is willing to contribute to the defense of the targeted country.
+
+3.13When an agent becomes activated, it will look at all the countries that it doesn’t have a link to and from those countries it will find the county that maximizes the product of vulnerability and payment. The country with the maximum attack score becomes the targeted country. At this point the active actor will have made its decision based on the information available to them. Not all decisions to go to war are rational and it is not guaranteed that the active country will carry out its threat to fight. Previous models made unrealistic assumptions about a countries decision to go to war but the democratic efficiency parameter adds this element of irrationality to our model.
+
+3.14The targeted country is faced with two options: they can either choose to pay the tribute to the active country (in which case they transfer a certain percent of their total wealth to the demander) or they can refuse the demand and war will occur. The targeted county will decide to pay tribute if the amount demanded in tribute is less than the cost of going to war. The threatened country engages in a cost minimization calculation in which they calculate whether losing wealth equal to 25 percent of the attacking countries wealth or losing the amount demanded in tribute is less costly.
+
+3.15Our model uses a proxy for alliance strength that is calculated using data from the CoW dataset. This measure exists for each defense agreement in each year considered. It contains information on the length of time the two countries have had a formal defense agreement with each other as a proxy for the strength of the relationship between the two countries. Alliances can, however, create some unintended consequences themselves. Historically, various alliance groups actually increased the probability of a conflict within the alliance. Because of this fact, many alliance groups started to add caveats to their alliance agreements that countries would only be obliged to come to the aid of another country if they were attacked by a country outside the alliance (Benson et. al. 2013, 47).
+
+3.16Alliance strength in our model is bounded between 0 and 1 and is used in the calculation of how much assistance a targeted country would receive from each country that has agreed to protect it if attacked. In the globalized model the strength of alliances is thought to have already emerged from real world processes. These link weights are treated as given and are fixed for the duration of all simulations, therefore, the weights and network connections do not update as the model runs.
+
+3.17The new links created in the model are not to be confused with defense agreements. They are created when one county decides to pay tribute to another country. After the tribute is paid and the link is created, those two countries will not target each other (in either direction) again. They do not commit any resources from one country to another.
+
+3.18If war occurs and the targeted country has no network, the attacking country has its wealth reduced by 25 percent of the targeted countries wealth and the targeted country has its wealth reduced by 25 percent of the attacking countries wealth.
+
+3.19If war occurs and the targeted country has a network, each country in the defense network multiplies the alliance strength it has with the targeted country by its own wealth. The sum of the amount that all countries will contribute is added to the wealth of the targeted country and this sum represents the total alliance contribution to be put toward the defense of the targeted country. Damage is done to the attacking country that is equal to 25 percent of the sum of the contributed wealth of all countries in the defense network plus the targeted countries own wealth. Damage is done to the targeted country equal to 25 percent of the wealth of the attacking country. Each country in the defense network of the targeted country has its wealth reduced by the total amount they contributed to the defense of the targeted country.
+Technical background
+
+3.20The code for preparing the data, running the simulation and experiments, and visualizing outcomes is available in a GitHub repository at the following link: https://github.com/hwalbert/Countries-as-Agents-in-a-Global-Scale-Computational-Model. This repository contains a static version of an R package that contains the raw data use for instantiating the model as well as the functions that allow creation of the different empirical instantiations of countries, networks, and attributes. The standard R documentation for this package is also included as a pdf file. The simulation model was created in NetLogo and is also available in the repository. The experiments for the model are included in the behavior space tool within NetLogo. Python scripts for analysis and visualization of results are also included.
+Results
+
+4.1We run experiments for the years 1940, 1960, 1980, and 2007. We sweep values from .1 to 1 in increments of .1 for the rate of tribute and democratic efficiency. For all parameter combinations, we run 100 trials. We also sweep values between .01 and 1 in increments of .01 to observe the results with finer texture. For each pair of exogenously determined parameter values we run 20 experiments. We use this set of experiments to generate heatmaps that include the mean values generated for variables for each pair of exogenously determined parameters. In the results we consider the average values generated in each set of runs. We discuss results that are representative of experiments across years.
+
+4.2Results of the experiments share many of the same characteristics of the original model. Axelrod notes that model runs show significant variation. Model runs show significant variation. Each set of parameters is usefully described by the mean values they generate. When agents do not perfectly maximize their expected wealth holdings, conflict can arise late in the model. Across runs, there tends to emerge a dominant player. There also can emerge two powerful, yet opposing players, as is the case between Russia and the United States in many runs. Nations with relatively greater levels of wealth tend to accumulate the greatest levels of wealth, but a nation’s initial endowment does not guarantee it success in any given run (Gilbert and Conte 1995, 28).
+
+4.3Axelrod found that his model could see devastating wars and other large events long into a model run. A typical run of the network tribute model will see an initial period of turbulence in which many wars of varying size are fought. This behavior can continue many years into the run of the model but after a time a sort of equilibrium will emerge and wealth will only grow at the rate of wealth increase in the model. This result is unique and different from one of the characteristics of the original Axelrod model where the model never settled down. This difference is probably due to the fact that this model takes the existing network as given, alliance strength is not dynamic in this model, and ties are not broken. Thus, a rigid hierarchy of tribute payments is inevitably formed, and with especial swiftness when tribute rates are relatively high.
+
+4.4We test varying combinations of values for democratic efficiency and tribute rates in the model. We expect to see that higher rates of tribute lead to relative impoverishment of society, including those who are collecting tribute, as defending nations have a significant incentive to go to war to prevent themselves from being subject to high rates of extraction.
+
+4.5The democratic efficiency parameter influences the likelihood that an aggressor who would profit from going to war actually follows through. The defending country decides whether to pay tribute or fight. In this case, the democratic efficiency parameter influences whether the defending nation will fight even when it expects that paying tribute would be cheaper. Since the aggressor is the first to act, we expect the effect of democratic efficiency on the frequency of war to be generally positive. We expect that increased democratic efficiency – i.e., only going to war when it is profitable – will tend to have welfare enhancing effects when tribute rates – that is the incentive to go to war – is relatively low.
+High tribute rates lead to lower levels of welfare across the system
+
+4.6The results show a generally negative correlation between tribute rates and the level of global wealth. The highest levels of wealth, for both the system and for individual states, occurs with the lowest rates of tribute (Figure 1). In cases where there is one agent whose holdings of iron and steel are multiples larger than the next most powerful country, this negative correlation reverses as the rate of tribute approaches 100%. Wars under this scenario are fought early on and lead to complete or nearly complete extraction of a losing nation’s resources. Having lost most or all of their resources, these nations are unable to engage in war later in the experiment. This finding is consistent with Kennedy’s (1989) work which concludes that a country’s economic resources are a prerequisite for sustained conflict. Although the level of wealth that develops at a tribute rate of 100% is relatively high for experiments in 1945 and 2007, this is an artifact of initial conditions where one nation – the United States in 1945 and China in 2007– is much wealthier than all others. In 1945, for example, not much wealth is lost from war since no nation is able to effectively oppose rule of the United States. This set of experiments exhibit an implicit hierarchy due to these discrepancies. Further, the model’s assumption that wealth extracted as tribute is efficiently invested within the recipient nation is independent from the productivity and welfare of other nations. In data from other years, such a discrepancy in power does not exist. High levels of tribute tend to lead to impoverishment across the system.
+
+4.7It is tempting to think of this result as reflecting an upward-sloping supply curve for war. As the expected return to war increases, more wars are fought (Figures 2 and 4). This is true for individual countries in the short-run, but the effect is complex. We must also consider that willingness for a nation to defend itself increases as the rate of extraction increases. Thus the cost of war increases significantly and wealth plummets at the beginning of runs where the tribute rate is relatively high (Figures 1 and 3). It takes a significant period of time for wealth to recover in these cases. This suggests a corollary to the Laffer curve, as tribute is essentially tax. Rather than substitute leisure for labor, nations attempt to avoid tribute payment in the model by engaging in war (Laffer 1981). Nations are more willing to submit to low rates of tribute than high rates. If aggressing nations agree to limit their rates of extraction, the growth rate of the system is improved. This tends to improve the growth of nations across the system, including more powerful nations. Likewise, acts of aggression that might lead to war are limited when the return to war is relatively small.
+Figure 1. Global Wealth.
+Figure 2. Number of Wars.
+Figure 3. Total Wealth of All Nations (1960).
+Figure 4. Number of Wars Fought (1960).
+
+4.8In terms of war, the effects of democratic efficiency may be ambiguous. We expect that less efficiency will lead to lower levels of wealth extraction by more powerful countries. This means that poorer countries may perform relatively well in cases of lower levels of democratic efficiency. Since our model shares with Axelrod’s model that the country that initiates war is only concerned with its financial ability to wage war, more wars are initiated under the original decision criteria compared to less efficient democratic decision-making where aggressive nations avoid war.
+
+4.9The expectation of less war occurring at low rates of democratic efficiency is observed as the rate of democratic efficiency approaches 0. As democratic efficiency falls below a level of .1, the number of wars experienced in the system collapses and the level of wealth in the system quickly rises. This is true even at the highest rates of tribute. At a rate of democratic efficiency of 0, we expect that, according to the model, there would be no wars.
+Alliance structure matters
+
+4.10In concordance with Schelling’s (1960) work, outcomes in each experiment depend largely upon alliance structure. This alliance structure has direct consequences for a country’s retaliatory capacity. A powerful country that attempts to attack a weaker country that whose alliance is able to repel the stronger country finds imperial expansion an unviable option. Figure 5 and 6 show cases where the most powerful nation is not opposed by a relatively strong alliance. Under every circumstance, the most powerful nation – the United States – is able to expand. The cost of war for the winning nation is offset by tribute from weaker nations. In the case that the tribute rate is relatively low (.1) and democratic efficiency is relatively high (1), a sustainable structure of tribute is established, allowing all nations to experience a positive, even if negligible, rate of growth.
+Figure 5. Wealth by State (1945).
+Figure 6. Wealth by State (1960).
+
+4.11Only in the case where the most powerful country can be opposed by a strong alliance do we see that conflict is either abated or that the nation that starts with the greatest resource capacity loses that position (Figure 7 and 8). The finding is consistent with Axelrod’s finding that alliance network can consist of have more than one powerful actor. This is the case in 1980 where the most powerful nation, Russia, is opposed by an alliance between Japan and the United States. If Russia attempts to extract from these nations at a high rate, United States and Russia respond by entering into conflict with Russia. Since these two, together, have greater resources than Russia, Russia loses these wars. In the case where Russia extracts a low rate of tribute and democratic efficiency is high, a tribute structure is formed early on that allows all nations to experience positive rates of growth.
+Figure 7. Wealth by State (1980).
+Figure 8. U.S. Defense Agreements and Japan Shown in Red Russian Defense Agreements Shown in Purple. Defense Network: 1980; Node Size = Wealth.
+Conclusion
+
+5.1Perhaps our main result is not surprising. Societies are best served when the extent to which they extract wealth (i.e., steal) from their neighbors is relatively low. Our model assumes that society experiences an equilibrium level of extraction for those who are successful in such endeavors. This feature allows us to investigate the relationship between rates of extraction of tribute and the predisposition toward war and welfare levels that result. Higher levels of tribute lead to more war, except under the premise that powerful nations are able to extract the entirety of another nation’s wealth. Further, we find that large discrepancies in power between the most powerful nations tend to lead to a single dominant player in the network.
+
+5.2We have provided a general model of international conflict and negotiation. Our model is not a predictive model in the sense that it accurately predicts future alliances and levels of wealth in each country. The model shows the relationship between the efficiency of decision-making processes and the incentive to engage in conflict as represented by the tribute rate. It is conceivable, however, that the model could be calibrated to reflect past levels of extraction or integrate other variables of significance that may make it useful for predicting future conflicts.
+
+5.3Extensions for future work include an extension similar to Mearsheimer’s (Toft 2005) work. Just as he focuses on the role of power and geography in world politics in his theory of offensive realism, we wish to expand our model by adding geographical components to the decisions that the agents make when deciding whether or not to go to war. There is also potential to include to a more in-depth network-based theory of alliance formation that relies on a more expansive data environment for the country-agents to use in decision making. Networks and structure also exist within a nation-state. Our model does not consider such structure, however, there is no reason why these structures cannot be simulated using voting models and other complex simulations of decision-making within government. 
+Fuzzy logic can be traced to Lofti Zadeh’s 1965 seminal paper “Fuzzy Sets” (Zadeh 1965). Since then, the theory of fuzzy sets has been successfully applied in a wide range of fields, but -contrary to its creator’s initial expectations– most applications are found outside the boundaries of the social sciences. In Zadeh’s own words: “When I wrote my 1965 paper, I expected that fuzzy set theory would be applied primarily in the realm of human sciences. Contrary to my expectation, fuzzy set theory and fuzzy logic are applied in the main in physical and engineering sciences” (Arfi 2014, foreword).
+
+1.2The use of fuzzy set theory in the social sciences is certainly not widespread, but ever since the early pioneering proposals (see e.g. Cioffi-Revilla 1981 and Smithson 1987) there has been a constant interest in potential applications of fuzzy logic for social modelling and simulation (Arfi 2014; Ragin & Pennings 2005). Nowadays, one can find several noteworthy examples in the field of social simulation and related domains (Denize et al. 2012; Dykstra et al. 2015; Fleischmann 2005; Fort & Pérez 2005; Góngora y Moreno & Gutierrez-Garcia 2017; Hassan et al. 2007, 2010, 2011, Lee et al. 2013, 2014; Olaru & Smith 2005; Sabater et al. 2006), and various proposals have been made to apply fuzzy logic in different social contexts (see e.g. Power 2009 and Neumann et al. 2011). There is also a NetLogo (Wilensky 1999) extension developed to facilitate the implementation of fuzzy approaches in agent-based simulations (Izquierdo et al. 2015), already being used in social simulation studies (Anand et al. 2017). More generally, a wide range of computer tools have been developed over the past years to make use of fuzzy logic in modelling, simulation and decision making, and many general computing environments such as MatLab implement popular fuzzy methods, like the so-called “Mamdani fuzzy inference” (MatLab 2016).
+
+1.3This widespread availability of ready-to-use software, the willingness of a community eager to apply new tools to the analysis of complex systems, and the apparent simplicity of the basic principles of fuzzy logic have led to a situation in which any scholar can nowadays build and use a simple fuzzy logic model in a matter of hours. This observation naturally constitutes a positive advancement in many aspects, but it also means that there is a potential risk of misapplying the theory and/or misusing the tools.
+
+1.4This paper focuses on the use of Mamdani inference, which is one of the most popular techniques in applied fuzzy logic. Mamdani inference is mainly used in fuzzy control (Driankov et al. 1996), but has also been applied in various other fields such as management and finance (Bojadziev & Bojadziev 2007; Korol 2012), economics (Stojic 2012; West & Linster 2003), risk assessment (Darbra et al. 2008; Nait-Said et al. 2008), and even for measuring the quality of education (Valdés-Pasarón, Márquez & Gaxiola 2011).
+
+1.5In this paper, we assess the usefulness of Mamdani systems for modelling, simulation and decision making. To achieve this end, we put together and synthesise several results already known in the field of fuzzy logic, and illustrate them with examples purposefully designed for our objectives. Our assessment is intended to be accessible to researchers who may not be experts in the field of fuzzy logic but are interested in exploring the possibilities of this particular fuzzy technique, with a focus on social simulation.
+
+1.6Mamdani systems have proven to be a very useful tool for function approximation and control (Cao et al. 2001) –an aspect that does offer interesting potential applications in the social sciences too-, so we will not discuss that aspect here; in this paper we analyse their potential usefulness as a tool for logical deductive inference to study, via simulation, the consequences and behaviour of a model defined by means of IF-THEN rules.
+
+1.7Mamdani systems are most often classified as a form of Approximate Reasoning, which has been defined as “the process or processes by which a possible imprecise conclusion is deduced from a collection of imprecise premises” (Pal & Mandal 2015). This categorization, together with the fact that the core component of a Mamdani system is a set of IF-THEN rules, can easily mislead one to believe that Mamdani systems can provide the logical implications of the set of rules used to build them, even if only approximately. Without pointing at any particular example, it is not difficult to find cases in the literature that seem to be taking this assumption for granted, either implicitly or explicitly. Specifically, one might be tempted to believe that in a Mamdani system the joint truth of the premises guarantees the truth of the conclusions. In logics that admit degrees of partial truth, this expectation would read that if the inputs of the system are true to some degree (i.e., they satisfy the antecedents of the rules to some extent), then the outputs of the system should also be true to at least the same degree (i.e., they should satisfy the consequents of the rules to at least the same extent). This fallacious interpretation of Mamdani systems as truth-preserving inference machines is certainly – and fortunately – not shared by everyone, but is reasonably widespread and does permeate many simulation applications of the technique.
+
+1.8To be clear, Mamdani systems are not truth-preserving in the sense stated above; they can lead to very different results from those obtained if the IF-THEN rules embedded within are interpreted as proper logical implications. This fact has already been well established in the specialized literature of fuzzy logic –as the quote below shows– but, arguably, it does not seem to be so conspicuous in many practical applications of the technique.
+
+1.9[The inference rule used by Mamdani systems] “is not a logical inference, i.e., a procedure aiming at the derivation of new facts from some other known ones using formal deduction rules. No logical implication is inside and thus, no modus ponens proceeds.” (Klawonna & Novák 1996).
+
+1.10This paper illustrates through several examples why the Mamdani method is not appropriate to explore the logical deductive consequences of a set of IF-THEN implication premises. More technical discussions of some of the aspects that we illustrate in this paper can also be found in the literature (Bodenhofer et al. 2007; Dubois & Prade 1996; Hájek 1998; Klawonna & Novák 1996; Novák 1994).
+
+1.11The remaining of this paper is structured as follows. Section 2 introduces Mamdani systems and Section 3 discusses their usefulness for modelling and simulation. The main objective of Section 3 is to show and illustrate with examples why Mamdani systems are not a proper tool to explore the logical consequences of IF-THEN rules; thus, they are not useful to explore the behaviour of a model defined by IF-THEN implication rules. Finally, in Section 4 we present the conclusions of the paper.
+Mamdani Fuzzy Systems
+
+2.1Mamdani fuzzy systems were originally designed to imitate the performance of human operators in charge of controlling certain industrial processes (Mamdani 1974, 1976, 1977; Mamdani & Assilian 1975). The aim was to summarize the operator’s experience into a set of (linguistic) IF-THEN rules that could be used by a machine to automatically control the process. Specifically, using such a set of IF-THEN rules, a Mamdani fuzzy system defines a function f
+which generates numerical outputs y=f(x) from (usually numerical) input values x
+
+. Here we present a reduced and simplified exposition of the method. For a more complete and detailed presentation, the reader is referred to sections 11.4.1 and 11.4.2 in Zimmermann (2001) or section 11.4 and chapter 12 in Klir & Yuan (1995).
+
+2.2Mamdani systems are composed of IF-THEN rules of the form "IF XisA
+THEN YisB", such as "IF PRESSURE is HIGH THEN VOLUME is LOW". The IF part “XisA” is called the antecedent of the rule, and the THEN part “YisB
+
+” is called the consequent of the rule.
+
+2.3For simplicity in the exposition of the method and the examples, let us assume that X
+and Y (PRESSURE and VOLUME respectively in the example above) are numerical variables defined on real intervals. The examples we provide can be easily adapted to other input and output spaces, multiple inputs, or fuzzy inputs. Thus, henceforth variable X is assumed to be defined in a real interval that we call the input interval, whilst variable Y is assumed to be defined in a real interval that we call the output interval. Let us use lower-case letters x and y to denote specific values of the variables X and Y
+
+respectively.
+
+2.4The symbols A
+and B (HIGH and LOW respectively in the example above) denote linguistic terms that are modeled as fuzzy sets defined on the input and output intervals respectively. Fuzzy set A is defined by a membership function µA that assigns a real value µA(x) between 0 and 1 to each element x in the input interval. The value µA(x) is called the degree of membership of element x in fuzzy set A, and can be interpreted as the extent to which element x belongs to fuzzy set A. If the fuzzy set A represents a certain concept (i.e. "HIGH"), µA(x) can also be interpreted as the truth value of the proposition "XisA" whenever X=x (e.g. the truth value of “PRESSURE is HIGH” whenever PRESSURE = x), represented as TruthValue(XisA|X=x). Likewise, fuzzy set B is defined by a membership function µB that assigns a real value µB(y) between 0 and 1 to each real value y
+
+in the output interval.
+
+2.5Most often Mamdani systems are composed of several IF-THEN rules. Naturally, each of the rules (which we index with subscript k
+) may use different fuzzy sets Ak and Bk
+
+. The antecedents and consequents can also be combined propositions that include the logical connectives AND or OR. A standard Mamdani system uses the following operations to compute the truth value of combined propositions:
+TruthValue(XisCORXisD|X=x)=max(TruthValue(XisC|X=x),TruthValue(XisD|X=x))=max(µC(x),µD(x))
+TruthValue(XisCANDXisD|X=x)=min(TruthValue(XisC|X=x),TruthValue(XisD|X=x))=min(µC(x),µD(x))
+The logical negation is implemented in a standard Mamdani system as follows:
+TruthValue(XisNOTA|X=x)=1-TruthValue(XisA|X=x)=1-µA(x)
+
+2.6Leaving aside a possible fuzzification step, which is not relevant for our discussion, the algorithm that a Mamdani system uses to compute a numerical output y
+from a numerical input X=x , given a set of rules "IF XisAk THEN YisBk
+
+", consists of the following steps:
+
+2.7 M1.- Compute the degrees of consistency between observations (inputs) and antecedents of each rule.
+In this step we evaluate the extent to which the antecedent of each IF-THEN rule is satisfied for a given input. The degree of consistency between an input or observation X=x
+and an antecedent "XisA" is simply the degree of membership of x in the fuzzy set A, i.e. µA(x). The result of this step is a number µAk(x) for each rule “IF XisAk THEN YisBk" (i.e. the degree of consistency between the input and each rule's antecedent). If µAk(x)>0 the corresponding rule k
+
+is said to be "fired".
+
+2.8 M2.- Truncate the fuzzy set in the consequent of each rule.
+The result of this step for each rule "IF XisAk
+THEN YisBk" is the fuzzy set Bk truncated at the level µAk(x), i.e., a set µoutputk|x
+
+such that
+µoutputk|x(y)=min(µBk(y),µAk(x))
+
+2.9 M3.- Aggregate all the truncated fuzzy sets.
+In this step the truncated fuzzy sets corresponding to each fired rule are aggregated to provide one single fuzzy set µMamdani|x
+
+defined by the membership function
+µMamdani|x(y)=maxk[µoutputk|x(y)]=maxk[min(µBk(y),µAk(x))]
+
+2.10The equation above clearly shows why Mamdani fuzzy systems are sometimes called max-min fuzzy systems.
+
+2.11M4.- Defuzzify the aggregated fuzzy set.
+The defuzzification step transforms the aggregated fuzzy set µMamdani|x
+into one single crisp number. Standard Mamdani systems use the Centre of Gravity (COG) defuzzification method. This method returns the projection (on the horizontal axis) of the centre of gravity of the area under the membership function µMamdani|x. If some input value is such that no rule is fired, the centre of gravity for µMamdani|x cannot be calculated. In that case, some default output value can be considered, or the system can be readjusted to avoid that situation (e.g. by modifying the fuzzy sets Ak
+
+, or by including new rules).
+
+2.12Given that the defuzzification step has a large influence on the final function that the system provides, we will also consider here two other alternative defuzzification methods (Leekwijck & Kerre 1999): i) First of Maxima. This method returns the smallest value of y for which the membership function µMamdani|x
+attains its maximum value. ii) Last of Maxima. This method returns the greatest value of y for which the membership function µMamdani|x
+
+attains its maximum value.
+Modelling Using Mamdani Fuzzy Systems
+
+3.1We consider two different potential objectives when modelling with Mamdani fuzzy systems: a) Modelling with the purpose of defining, capturing or reproducing some input-output function. b) Modelling with the purpose of exploring the logical consequences of an IF-THEN rule or of a set of IF-THEN rules.
+
+3.2As to the first objective, Mamdani systems have proven to be a very useful tool for defining or approximating functions based on IF-THEN rules, and they have been quite successful on practical applications, mainly in the field of control systems (Driankov et al. 1996; Thirumoorthi & Yadaiah 2015; Zimmermann 2001). Some of the appealing features of Mamdani systems for this purpose are: i) Flexibility: Mamdani-type fuzzy controllers are universal fuzzy controllers (Cao et al. 2001). ii) They provide a natural framework to include expert knowledge in the form of linguistic rules (Cordón et al. 2001). iii) Local adaptability: it is possible to define rules that are fired only at some specific regions of the input space. This allows for local adaptations of the working function on those particular regions without modifying the function outside those regions (Mamdani 1994).
+
+3.3Henceforth we will focus our discussion on the second potential objective of modelling with IF-THEN rules, namely exploring the behaviour or consequences of a model which is characterized by a set of IF-THEN rules. Our objective is to illustrate and explain why Mamdani systems are dangerous tools for that purpose. To that end, we will first discuss the effect of IF-THEN rules in Mamdani systems. We are interested in the total input-output effect. Thus, even though we will sometimes refer to the intermediate steps where the fuzzy consequents of each IF-THEN rule are truncated, we will always be considering the final input-output effect of a rule after the system has gone through all its steps, including aggregation and defuzzification. This tactic complements the approach usually followed in fuzzy logic, which has typically focused on the study of each individual step of the process in isolation. By contrast, here we study the properties of the final function provided by the Mamdani system as a whole, treating its inner intermediate steps as black boxes.
+
+3.4Thus, the question is whether an IF-THEN rule of the form “IF X
+is A THEN Y is B" in a Mamdani system imposes the same kind of input-output relation that one could expect if the rule were to be interpreted as a logical implication. Specifically, given the rule “IF X is A THEN Y is B", and interpreting µA(x) as the truth value of proposition "XisA" whenever X=x, we aim to find out whether providing any input x with high degree of membership in A (high µA(x)) guarantees that its corresponding output y(x) will have a high degree of membership in B (high µB(y(x))
+
+), which we consider to be the relation that one would expect if the rule were interpreted as a logical implication.
+
+3.5More precisely, consider a Mamdani system with the rule “IF X
+is A THEN Y is B". This system defines a function y that assigns a unique output value y(x) to each input value x. We aim to determine whether the presence of the rule “IF X is A THEN Y is B" in the system guarantees that the constraint µB(y(x))=µA(x) is satisfied for all inputs x, either strictly or approximately in some sense [1]. Considering that the implication connective a?c tries to quantify the degree by which the consequent c is at least as true as the antecedent a (Hájek 1998; Smets and Magrez 1987), we will refer to the previous condition as the logical-implication interpretation of the rule “IF X is A THEN Y is B
+
+".
+
+3.6We will start by discussing systems with a single rule, and then we will discuss systems with more rules. It must be said beforehand that Mamdani systems with only one rule are generally not used. The reason is that each individual rule in a Mamdani system is intended to shape the final function somewhat locally, i.e. individual rules modify the input-output relation on specific regions of the input space without necessarily altering the relation on other regions (i.e. those where the rule does not apply) (Bodenhofer et al. 2007). Thus, a system with a single rule will usually leave the input-output relationship undefined where the rule is not fired, and, even if fired, one single rule will usually fail to capture any minimally complex association. Nonetheless, discussing systems with a single rule will be instructive because they are simple and, at the same time, sufficient to show the difference between the Mamdani effects and the logical-implication effects of an IF-THEN rule. Furthermore, since single-rule systems lack the aggregation step, their analysis provides a neater understanding of the other steps of the Mamdani process (most notably the defuzzification step, which is pivotal in our arguments).
+Single-rule systems
+
+3.7In this section, we study a standard Mamdani system with one single rule “IF X
+is A THEN Y is B". This system defines a function y which, given an input x, produces an output y(x). It is shown below that the function y provided by the Mamdani system does not necessarily satisfy the constraint µB(y(x))=µA(x) for all inputs x
+
+(i.e. the logical-implication interpretation of the rule), neither precisely nor approximately, even in those cases in which there does exist one or multiple functions that do satisfy the constraint.
+
+3.8In order to work with a concrete example let us suppose that X
+and Y take real values in the interval [0, 10], and let us consider the rule “IF X is large THEN Y is large", where the fuzzy set "large" is defined in the interval [0, 10] by the membership function µlarge(z)=0.1z for both variables X and Y
+
+(Figure 1).
+
+3.9We discuss the following question: Is a Mamdani system a proper tool to explore the logical consequences of an IF-THEN rule about the variables in the system? To this end, first we consider the difference between the logical consequences of the rule and one of the logically consistent outputs.
+Figure 1. Membership function of the fuzzy set “large”.
+
+3.10Suppose that we assume that a Mamdani system will provide the input-output relationship implied by the rule “IF X
+is large THEN Y is large". Note that there is already some a priori impossibility result in the response to this question, because in general a logical IF-THEN rule does not define any specific function (which is what a Mamdani system will return), but it only rules out some input-output value combinations (in crisp logic, those combinations which make the antecedent TRUE and the consequent FALSE). Any specific function will necessarily leave out any other alternative functions that may be equally compatible with the logical rule. If we consider that the functions compatible with the rule “IF X is large THEN Y is large" are those functions f such that µlarge(f(x))=µlarge(x) for all inputs x, then it is clear that there are many possible functions compatible with the rule. In fact, any function such that f(x)=x for all inputs x in the range [0, 10] will do (for instance, the constant function defined by f(x)=10
+
+or any of the functions represented in Figure 2). Any function “drawn” above the dashed diagonal lines in Figure 2 would be compatible with this rule.
+Figure 2. Rule-compatible functions. Different functions f
+fully compatible with the rule “IF X is large THEN Y is large” in the sense that they satisfy the constraint µlarge(f(x))=µlarge(x)
+.
+
+3.11Note the risks of considering any of the rule-compatible functions represented in Figure 2 as if it were “the” logical consequent function of the IF-THEN rule, or as if it were characterizing the logical implication of the IF-THEN rule. Any system that provides a function as the result of an IF-THEN rule should be suspicious in the sense that it is probably making many additional assumptions about the input-output relationship than just those corresponding to the logical-implication interpretation of the IF-THEN rule.
+
+3.12To illustrate this point further, consider for instance the crisp rule “IF X=2
+THEN Y=8". Note that looking for "the logical consequent function" derived from this rule is something that does not make much sense. What output value should such a theoretical function provide for an input value x=1? The constraint “IF X=2 THEN Y=8
+
+" indicates that certain output values are not allowed, but it does not specify what "the" output value should be.
+
+3.13In general, choosing one particular value that is consistent with a rule is a very different exercise from that of exploring the logical consequences of the rule. Suppose, for instance, that the evidence of a murder scene indicates that the killer was a dog. An inspector who takes the first dog he sees and delivers it as the murderer is providing an output (i.e. the dog as the killer) that is consistent with the evidence, but taking that particular dog as the murderer can hardly be called “the logical consequence” of the evidence.
+
+3.14Going back to our example with the rule “IF X
+is large THEN Y is large", we already know that there are infinite functions f that satisfy the constraint µlarge(f(x))=µlarge(x) for all inputs x. However, a standard Mamdani system (with COG defuzzification) with the rule "IF X is large THEN Y is large" provides the function y represented in Figure 3, which, for a large range of input values, is not compatible with the logical-implication interpretation of the rule, i.e., it is not even one of the infinite possible functions that do satisfy the constraint µlarge(y(x))=µlarge(x)
+
+.
+Figure 3. Mamdani function. Representation of the function generated by a Mamdani system with the rule “IF X is large THEN Y is large”. The points below the dashed diagonal do not satisfy the logical implication constraint µlarge(y(x))=µlarge(x)
+.
+
+3.15It must be noted here that, in the single rule case, a Mamdani-like system with one of the so-called maxima defuzzification methods (Leekwijck & Kerre 1999) such as First of Maxima or Last of Maxima, instead of Centre of Gravity, would provide one of the (possibly many, if they exist [2]) functions y
+satisfying the constraint µB(y(x))=µA(x) for all inputs x
+
+[3]. However, each defuzzification method has advantages and drawbacks (Hellendoorn & Thomas 1993; Klir & Yuan 1995; Leekwijck & Kerre 1999; Ross 2010; Zimmermann 2001). The maxima methods are usually considered to be better candidates for fuzzy reasoning systems, while the Centre of Gravity method and other area methods exhibit the property of continuity, which makes them more suitable for fuzzy controllers (Leekwijck & Kerre 1999).
+
+3.16In short, for a standard Mamdani system we arrive at the following result:
+
+3.17Caveat 1: The function y
+produced by a standard Mamdani system with rule “IF X is A THEN Y is B" does not necessarily satisfy the constraint µB(y(x))=µA(x) for all inputs x
+
+, even if there exist functions that do satisfy the constraint.
+
+3.18The following example will illustrate that a standard Mamdani system with rule “IF X
+is A then Y is B" may not comply with the logical-implication interpretation of its rule at all, i.e. not even in the approximate sense that any input x with high membership in A -high µA(x)- should guarantee an output y(x) with high membership in B -high µB(y(x))
+
+.
+
+3.19Let us consider the rule “IF X
+is large THEN Y is NOT about five", where the fuzzy set “about five” is defined in the interval [0, 10] as shown in Figure 4 and the fuzzy set “NOT about five” is defined by the membership function µNOT about five(y)=1-µabout five(y)
+
+.
+Figure 4. Membership functions for the fuzzy sets “About five” (left) and “NOT about five” (right).
+
+3.20Considering that the consequent fuzzy set “NOT about five” is defined by a membership function that is symmetric around y = 5, the output of a Mamdani system with the rule “IF X
+is large THEN Y is NOT about five" for any input value x that fires the rule is precisely y(x)=5
+
+, i.e., the very value that does not satisfy the consequent of the rule to any degree.
+
+3.21The purpose of the previous example is to show that, in a Mamdani system with the rule “IF X
+is A THEN Y is B", an input x may satisfy the antecedent to a large or even total degree (µA(x)=1) but its corresponding output y(x) may not satisfy the consequent to any degree whatsoever (µB(y(x))=0). We can draw two important lessons from this observation. The first lesson is that there are Mamdani systems for which the constraint µB(y(x))=µA(x)
+
+(i.e. the logical-implication interpretation of the rule) is as far from being valid as it can possibly be, at least for some inputs. Thus, we can state that, in general, Mamdani systems do not necessarily satisfy the logical-implication interpretation of their rules, neither precisely nor approximately. Specifically, we can issue the following two caveats, which could be considered the fuzzy extensions of Caveat 1.
+
+3.22Caveat 2. In a standard Mamdani system with rule “IF X
+is A THEN Y is B", an input x with high degree of membership in A (high µA(x)) does not guarantee an output y(x) with high degree of membership in B (high µB(y(x))
+
+).
+
+3.23Caveat 3. In a standard Mamdani system with rule "IF X
+is A THEN Y is B", the observation of an output y(x) with low degree of membership in B (low µB(y(x))) does not guarantee that its corresponding input(s) x have low degree of membership in A (low µA(x)
+
+).
+
+3.24The second lesson we can draw from the example is that neither the rule of inference modus ponens (which allows inferring that the consequent will be true whenever the antecedent is true) nor the rule of inference modus tollens (which allows inferring that the antecedent is false whenever we observe that the consequent is false) can be safely applied when dealing with Mamdani systems. In other words, in Mamdani systems with one rule of the form “If Antecedent THEN Consequent”:
+
+    If the Antecedent is fully true, it cannot be inferred that the Consequent must be true; the Consequent could be completely false (i.e. modus ponens does not apply).
+    If the Consequent is fully false, it cannot be inferred that the Antecedent must be false; the Antecedent could be completely true (i.e. modus tollens does not apply).
+
+3.25Basically, Mamdani systems include information about the function that one wants to obtain using the same language of logical implications, but the real effect of an “IF X
+is A THEN Y is B
+
+" rule over the obtained function can be very different from its expected effect if it is understood as a logical implication.
+
+3.26In summary, a Mamdani system with a single rule “IF X
+is A THEN Y is B" provides a function y in the support of the antecedent which, depending on the defuzzification method, will be one of the (possibly infinite) functions f that satisfies the logical implication constraint (i.e. µB(f(x))=µA(x) for all inputs x
+
+), or a function that does not even meet that condition, neither exactly nor approximately, even if there are available functions that do satisfy the condition. In either case, it seems clear that these systems do not constitute a proper tool to explore the logical consequences of an IF-THEN implication premise.
+
+3.27Naturally, this general result does not preclude the fact that, in certain particular cases or under additional constraints, the outputs provided by a Mamdani system may “make sense” when the rules are interpreted as logical implications. Some scholars have studied conditions under which these systems can be more amenable to admit some “interpretability”, although the word “interpretability” is often used in an intuitive and informal sense (Alonso & Magdalena 2011; Alonso et al. 2009; Cordón 2011; Jin 2003; Moraga 2012). The definition and measure of interpretability is an active current trend of research in the field (Alonso et al. 2015).
+
+3.28In the following section we discuss the multi-rule case, where –regardless of the defuzzification method– the logical implication constraint (i.e. µBk(y(x))=µAk(x)
+for all inputs x
+
+) is not guaranteed for every rule in the system, not even in those cases in which there exist functions that do satisfy all such constraints. This is due to the way aggregation is carried out in a Mamdani system.
+Systems with multiple rules
+
+3.29Consider a Mamdani system with the following two rules:
+
+    IF X
+
+is approximately less than three THEN Y is greater than five
+IF X
+is approximately less than two THEN Y is about nine
+
+3.30Where the fuzzy sets “approximately less than three”, “greater than five”, “approximately less than two” and “about nine” are represented in Figure 5. What output could we expect from this system for low input values, e.g. for x less than one?
+
+3.31It seems clear that any input x=1
+satisfies completely the antecedents of both rules, so if we interpret the rules as two logical implications, and we want the output to satisfy both rules completely, the corresponding output value should be y=9. In contrast, a Mamdani system provides an output value y=7.47
+
+.
+Figure 5. Mamdani process. The input value, the truncated output fuzzy sets for each rule and the final output of the system are represented.
+
+3.32Let us consider the aggregation step, represented in Figure 5. Given that for x=1
+
+the antecedents of both rules are satisfied completely, the result of the first rule is precisely the fuzzy set “greater than five” and the result of the second rule is the fuzzy set “about nine” (see Figure 5). The use of the function MAX as an aggregation method in Mamdani systems provides in this case an output that coincides with the fuzzy set “greater than five” and loses the information in “about nine”.
+
+3.33Naturally, the reason is that the aggregation step in a Mamdani system is not intended to produce outputs that satisfy all the IF-THEN implication rules. In some cases (e.g., if a maxima defuzzification method such as First of Maxima or Last of Maxima is used), the Mamdani system will provide an output in accordance with at least one of the IF-THEN rules that the input fires (assuming that at least one rule is fired), i.e., an output value y(x)
+such that µBk(y(x))=µAk(x) for some rule "IF X is Ak THEN Y is Bk"; however, that very output y(x) could be simultaneously violating the constraints imposed by the other rules. That is indeed the case in our example: for an input x=1, the First of Maxima defuzzification method provides y(1)=6, and the Last of Maxima defuzzification method provides y(1)=10. Both values satisfy µB(y(1))=1=µA(1)=1 for the rule “IF X is approximately less than three THEN Y is greater than five”, but none of them satisfies the corresponding relation for the rule “IF X is approximately less than two THEN Y is about nine”. In fact, with both methods the input satisfies the antecedent of this latter rule completely, but the output does not satisfy the corresponding consequent of the rule to any degree whatsoever: µAbout9(y(1))=0<µ~LessThan2(1)=1
+
+.
+
+3.34If the COG defuzzification method is used, the selected output can be interpreted as a compromise or interpolated value between output regions (fuzzy sets), but that interpolated value may not itself belong to any of the regions, i.e., it may not satisfy any of the logical-implication constraints to any degree at all.
+
+3.35In short, it is clear then that the MAX aggregation method of Mamdani systems is not consistent with a conjunctive interpretation of the set of IF-THEN rules. In fact, a rule such as
+
+    IF X
+
+is outlier THEN Yis very smallORY is very large
+
+is equivalent in a Mamdani system (using the MAX function for logical OR) to the set of rules:
+
+    IF X
+
+is outlier THEN Y is very small
+IF X
+is outlier THEN Y is very large
+
+3.36So the effect of a set of rules in a Mamdani system is disjunctive rather than conjunctive (Dubois & Prade 1996). Incidentally, in this example, for an input x with a high degree of membership in the fuzzy set “outlier”, the output of a Mamdani system with the COG defuzzification method would be an interpolation or compromise between the “very small” and “very large” regions, and the result of this compromise will likely not belong to any of the extreme regions, i.e., it may not satisfy the consequent of any rule to any degree. Thus, we summarize this point in the following caveat.
+
+3.37Caveat 4. In a standard Mamdani system with several rules of the form "IF X
+is Ak THEN Y is Bk", an input x that complies with the antecedents of all the rules to a great extent (high µAk(x) for all k) may lead to an output y which does not satisfy the consequent of any of the rules to any extent (low µBk(y(x)) for all k
+
+).
+
+3.38A crucial consequence of the MAX aggregation method is that IF-THEN rules in a Mamdani system have effects on the final output of the system that cannot be analyzed independently of other IF-THEN rules that may be fired simultaneously in the system.
+
+3.39Finally, it should be noted here that, as indicated for single-rule systems, one could consider additional constraints on the definitions of the fuzzy sets and on the rule base to try to avoid the type of effects that we have discussed here, and thus attempt to make the system more amenable to some notion of interpretability (Alonso et al. 2009; Cordón 2011; Jin 2003). Nonetheless, in the absence of such efforts, it is clear that regarding Mamdani systems as truth-preserving inference machines –even if only approximately– is certainly not appropriate.
+Conclusions
+
+4.1This paper discusses the usefulness of Mamdani fuzzy systems for modelling, simulation and decision making. We have considered two different objectives of the modelling process. The first objective is the approximation or definition of a function using information in the form of linguistic IF-THEN rules. The second objective is the exploration of the logical implications of a model defined by a set of IF-THEN rules that express some causality or relation between two (or more) variables X
+and Y
+
+.
+
+4.2As to the first objective, it is clear that Mamdani systems have proven successful for function approximation in many practical applications (Azzini et al. 2008; Behnamian 2015; Elragal 2014; Shankar et al. 2015; Yang et al. 2015), especially in fuzzy control. Their success is mainly derived from two characteristics that are very convenient for this objective: Mamdani systems are universal approximators and can include knowledge in the form of linguistic rules that can be used for local fine-tuning.
+
+4.3By contrast, the use of Mamdani systems for the second objective stated above is questionable (Klawonna & Novák 1996). The bottom line is that a Mamdani system with a rule “IF X
+is A THEN Y is B” can generally fail to assign outputs with high membership in B to inputs with high membership in A
+
+. This failure is a consequence of two operations that take place within Mamdani systems: defuzzification and aggregation.
+
+4.4The COG defuzzification method used in standard Mamdani systems does not guarantee that the output will satisfy the consequent of an IF-THEN rule to at least the same degree that the input satisfies the antecedent. In fact, in the general case, it does not guarantee that the output will satisfy the consequent to any degree at all, regardless of how much the input satisfies the antecedent.
+
+4.5As for the aggregation of rules, the MAX operator used in standard Mamdani systems does not permit an interpretation of the IF-THEN rules as independent implication constraints which must be simultaneously (i.e. conjunctively) satisfied –either completely or, in some sense, to the highest possible common degree. This method aggregates the output sets of each fired rule as if they were disjunctive rules; if the rules are understood as constraints on the output values, this means that some of the constraints, even if fired, may not be effective at all. As a consequence, an individual rule, however sharp or restrictive it may be when interpreted as an implication constraint, may not actually impose any actual constraint or have any effect whatsoever on the output of the Mamdani system (see section 3.28). This can certainly generate some confusion, either when trying to interpret the set of rules of a Mamdani system or when trying to incorporate expert or previous knowledge in the system:
+
+    "The almost systematic use of conjunction-based representations, since Mamdani's early works, including Sugeno's fuzzy rules with precise conclusions, is surprising from the point of view of logic: conjunction-based rules do not fit with the usual meaning of rules in expert systems." (Dubois & Prade 1996). 
+
+4.6It must be noted here that other fuzzy-logic-based approaches to function approximation with IF-THEN rules are possible (Hájek 1998, 2010; Jones et al. 2009; Klawonna & Novák 1996), and that some of these approaches would obtain a) one of the functions that do satisfy all the IF-THEN rule implication constraints (in the sense µBk(y(x))=µAk(x)
+for all rules k)
+
+) whenever such functions exist, or b) one of the functions that best satisfy the implication constraints according to some criteria, whenever complete satisfaction is not possible. This approach, based on fuzzy rules interpreted as logical implications, has been termed deductive interpretation (Bodenhofer et al. 2007) or implication-based model (Dubois & Prade 1996).
+
+4.7In more general terms, one should always be wary of interpreting methods that produce functions (i.e., correspondences that assign one unique output value to each input value) from IF-THEN rules, as if they were providing the logical consequences of the rules. If by “the logical consequences of the rules” we understand the set of values y(x)
+that for a given input x, are consistent with the IF-THEN rules as logical implications (i.e. those values y(x) that for a given input x, are consistent with the IF-THEN rules as logical implications (i.e. those values y(x) that satisfy µBk(y(x))=µAk(x) for all rules k
+
+either strictly or approximately in some sense) then, in most cases, the set of consistent values will not define a unique function, and any system that in such cases provides a particular input-output function will possibly be making –either implicitly or explicitly– strong assumptions about the behaviour of the system beyond those embedded in the IF-THEN rules and the membership functions. This important aspect of the function-approximation techniques is often ignored in the literature on fuzzy control and approximate reasoning:
+
+    "Various books explaining fuzzy control, written by non-logicians, suffer by logical mismatch caused by the fact that "fuzzy IF-THEN rules" are presented as implications but then used to construct a fuzzy relation having little to do with any implication, at least at first glance.” (Hájek 1998). 
+
+4.8As Novák (Novák 2012) indicates about the function-approximation approach, “This method of interpretation of fuzzy IF-THEN rules is very convenient when we need a nice tool for the approximation of functions but it is less convenient as a model of human reasoning”. Such models can also be very sensitive to apparently irrelevant choices in the fuzzy inference process, particularly those pertaining to the defuzzification method.
+
+4.9To conclude, suppose that we use a Mamdani-like system to simulate and explore the behaviour of a model defined by a set of IF-THEN rules. If by consistency of an outcome we understand that the outcome satisfies the consequents of the rules to at least the same degree as its corresponding input satisfies the antecedents, then any simulation based on IF-THEN rules and on this type of methods that obtain functions from rules will be providing, in the best-case scenario – for instance, if deductive inference (Bodenhofer et al. 2007) is used –, just one of the (possibly many and possibly very different) outcomes that are consistent –or in some sense most consistent– with the IF-THEN rules; in the worst-case scenario, which may happen for instance if a Mamdani approach is used, it will be providing an outcome that may not belong to the set of most-consistent outcomes and which in fact may even be highly inconsistent with the rules.
+
+4.10Obtaining a unique output from observations and rules can be a potentially desired objective of a logical process, but the selection of that unique output should not be based on arbitrary steps. Sherlock Holmes famously stated: “It is an old maxim of mine that when you have excluded the impossible, whatever remains, however improbable, must be the truth.” (Doyle 1982). Note that the key to finding the explanation or the consequence of the evidence is not choosing one particular explanation that is consistent -or, in some sense, the most consistent- with the currently available facts, but eliminating alternative explanations that have not been eliminated yet, a process which may require the acquisition of new evidence. Whenever the available evidence points to a broad set of possible culprits of a crime, it is difficult to think that Holmes would be happy by just choosing any of them as the culprit. If a witness indicates that the criminal “was tall”, the statement “his height is 2 meters” might be considered one of the most consistent statements with relation to the evidence, but it seems very unsatisfactory and misleading to say that it would be the logical consequence of the testimony. In a sense, defuzzification, or choosing one particular value from a set of possible values plays this role of selecting one particular culprit when the evidence equally points to many ones, or when it has little discriminatory power among them. Defuzzification is needed if one is looking for a unique output value corresponding to an input value but, as Leekwijck and Kerre indicate (Leekwijck & Kerre 1999), “the whole concept of defuzzication is completely opposite to the main purpose of fuzzy set theory namely the extension of crisp concepts and theories”.
+
+4.11We conclude this assessment with a few practical take-away messages. Suppose that you are considering a Mamdani system to capture the decision procedure of some agent in your model:
+
+    If the decision procedure is originally characterised by logical IF-THEN rules, i.e., if those rules are the axioms or primitives that define the decision procedure of the agent, then, Mamdani systems are not a safe tool to explore the expected logical consequences of those rules: without further validation, they may not provide what one could expect according to almost any sensible interpretation of those rules.
+    However, if the decision function of an agent, understood as an inputs-output relationship, is known (or if there is enough data), Mamdani systems can be safely used to approximate and “store” that function. Note that this is a function-approximation approach (based on adjusting data points), in contrast with the deductive approach (based on obtaining the logical consequences of the rules).
+    If some degree of interpretability or logical link between IF-THEN rules and outputs in a Mamdani system is desired, one should consider additional constraints to those required by a standard Mamdani system, or alternative fuzzy-logic techniques that try to preserve interpretability to a greater degree (Bodenhofer et al. 2007).
+
+Acknowledgements
+The authors are very grateful to Doina Olaru for many productive discussions and several comments. This research was partly supported under Australian Research Council’s Discovery Projects funding scheme (project number DP130100570, “Modelling Network Innovation Performance Capability: A Multidisciplinary Approach”), Spanish Ministry of Science and Innovation’s project CSD2010-00034 (SIMULPAST), project ECO2017-83147-C2-2-P (MINECO/AEI/FEDER, UE) and project ECO2017-83147-C2-1-P (MINECO/ AEI/FEDER, UE).
+Notes
+
+    If for a given input x
+
+there is no possible output value y(x) such that µB(y(x))=µA(x), we can check whether the obtained output is one of the values in the output range that minimize µA(x)-µB(y(x))
+.
+If the fuzzy set B
+in the consequent of the IF-THEN rule is normal, i.e., if there is some value y* (possibly not unique) such that µB(y*)=1, then it is clear that there exist functions, such as the constant functions defined by y(x)=y*, which do satisfy the constraint µB(y(x))=µA(x)
+for all inputs x.
+One could also consider additional constraints in the desired functions, such as continuity, or the property that the greater the degree of satisfaction of the antecedent, the greater the degree of satisfaction of the consequent: µA(x1)>µA(x0)?µB(y(x1))>µB(y(x0))
+for all inputs x0, x1
+
+    .
+
+References
+
+ALONSO, J. M., Castiello, C., & Mencar, C. (2015). Interpretability of Fuzzy Systems: Current Research Trends and Prospects. In J. Kacprzyk & W. Pedrycz (Eds.), Springer Handbook of Computational Intelligence SE - 14 (pp. 219–237). Springer Berlin Heidelberg. [doi:10.1007/978-3-662-43505-2_14]
+
+ALONSO, J. M., & Magdalena, L. (2011). Special issue on interpretable fuzzy systems. Information Sciences, 181(20), 4331–4339.
+
+ALONSO, J. M., Magdalena, L., & González-Rodríguez, G. (2009). Looking for a good fuzzy system interpretability index: An experimental approach. International Journal of Approximate Reasoning, 51(1), 115–134. [doi:10.1016/j.ijar.2009.09.004]
+
+ANAND, S., Sharma, I., & Goyal, R. (2017). Extended Understanding of Dyadic Friendship Using Fuzzy Measures: a Simulation Approach. IEEE Access, 5, 21179–21192.
+
+ARFI, B. (2014). Linguistic Fuzzy Logic Methods in Social Sciences. Berlin, Heidelberg: Springer.
+
+AZZINI, A., Marrara, S., Sassi, R., & Scotti, F. (2008). A fuzzy approach to multimodal biometric continuous authentication. Fuzzy Optimization and Decision Making, 7(3), 243–256.
+
+BEHNAMIAN, J. (2015). Survey on fuzzy shop scheduling. Fuzzy Optimization and Decision Making, 15(3), 331–366. [doi:10.1007/s10700-015-9225-5]
+
+BODENHOFER, U., Dankova, M., Stepnicka, M., & Novak, V. (2007). A Plea for the Usefulness of the Deductive Interpretation of Fuzzy Rules in Engineering Applications. In 2007 IEEE International Fuzzy Systems Conference (pp. 1–6). IEEE.
+
+BOJADZIEV, G., & Bojadziev, M. (2007). Fuzzy Logic for Business, Finance, and Management (2nd ed.). Advances in Fuzzy Systems - Applications and Theory, Vol. 23. River Edge, NJ, USA: World Scientific. [doi:10.1142/6451]
+
+CAO, S. G., Rees, N. W., & Feng, G. (2001). Mamdani-type fuzzy controllers are universal fuzzy controllers. Fuzzy Sets and Systems, 123(3), 359–367.
+
+CIOFFI-REVILLA, C. A. (1981). Fuzzy Sets and Models of International Relations. American Journal of Political Science, 25(1), 129–159. [doi:10.2307/2110917]
+
+CORDÓN, O. (2011). A historical review of evolutionary learning methods for Mamdani-type fuzzy rule-based systems: Designing interpretable genetic fuzzy systems. International Journal of Approximate Reasoning, 52(6), 894–913.
+
+CORDÓN, O., Herrera, F., Hoffmann, F., & Magdalena, L. (2001). Evolutionary tuning and learning of fuzzy knowledge bases. Genetic fuzzy systems, 19. [doi:10.1142/4177]
+
+DARBRA, R. M., Eljarrat, E., & Barceló, D. (2008). How to measure uncertainties in environmental risk assessment. TrAC - Trends in Analytical Chemistry, 27(4), 377–385.
+
+DENIZE, S., Purchase, S., & Olaru, D. (2012). Using Case Data to Ensure “Real World” Input Validation within Fuzzy Set Theory Models. In Fuzzy Methods for Customer Relationship Management and Marketing (Vol. 1, pp. 61–89). IGI Global. [doi:10.4018/978-1-4666-0095-9.ch004]
+
+DOYLE, A. C. (1892). Adventures of Sherlock Holmes. The adventure of the beryl coronet. The Strand Magazine, 17.
+
+DRIANKOV, D., Hellendoorn, H., & Reinfrank, M. (1996). An Introduction to Fuzzy Control (2nd ed.). Berlin, Heidelberg: Springer. [doi:10.1007/978-3-662-03284-8]
+
+DUBOIS, D., & Prade, H. (1996). What are fuzzy rules and how to use them. Fuzzy Sets and Systems, 84(2), 169–185.
+
+DYKSTRA, P., Jager, W., Elsenbroich, C., Verbrugge, R., & de Lavalette, G. (2015). An Agent-Based Dialogical Model with Fuzzy Attitudes. Journal of Artificial Societies and Social Simulation, 18 (3) 3: http://jasss.soc.surrey.ac.uk/18/3/3.html. [doi:10.18564/jasss.2813]
+
+ELRAGAL, H. M. (2014). Mamdani and Takagi-Sugeno fuzzy classifier accuracy improvement using enhanced particle swarm optimization. Journal of Intelligent and Fuzzy Systems, 26(5), 2445–2457.
+
+FLEISCHMANN, A. (2005). A Model for a Simple Luhmann Economy. Journal of Artificial Societies and Social Simulation, 8(2), 2: http://jasss.soc.surrey.ac.uk/8/2/4.html.
+
+FORT, H., & Pérez, N. (2005). The Fate of Spatial Dilemmas with Different Fuzzy Measures of Success. Journal of Artificial Societies and Social Simulation, 8 (3) 1: http://jasss.soc.surrey.ac.uk/8/3/1.html.
+
+GÓNGORA y Moreno, S. F., & Gutierrez-Garcia, J. O. (2017). Collective action in organizational structures. Computational and Mathematical Organization Theory, 1–33.
+
+HÁJEK, P. (1998). Metamathematics of Fuzzy Logic (Vol. 4). Dordrecht: Springer Netherlands.
+
+HÁJEK, P. (2010). Fuzzy Logic. In The Stanford Encyclopedia of Philosophy (Fall 2010 Edition). Edward N. Zalta (ed.).
+
+HASSAN, S., Garmendia, L., & Pavón, J. (2007). Agent-based social modeling and simulation with fuzzy sets. In E. Corchado, J. M. Corchado, & A. Abraham (Eds.), Advances in Soft Computing (Vol. 44, pp. 40–47). Berlin, Heidelberg: Springer.
+
+HASSAN, S., Garmendia, L., & Pavón, J. (2010). Introducing uncertainty into social simulation: using fuzzy logic for agent-based modelling. International Journal of Reasoning-Based Intelligent Systems, 2(2), 118–124. [doi:10.1504/IJRIS.2010.034907]
+
+HASSAN, S., Salgado, M., & Pavón, J. (2011). Friendship Dynamics: Modelling Social Relationships through a Fuzzy Agent-Based Simulation. Discrete Dynamics in Nature and Society, Art 765640.
+
+HELLENDOORN, H., & Thomas, C. (1993). Defuzzification in Fuzzy Controllers. Journal of Intelligent & Fuzzy Systems: Applications in Engineering and Technology, 1(2), 109–123.
+
+IZQUIERDO, L. R., Olaru, D., Izquierdo, S. S., Purchase, S., & Soutar, G. N. (2015). Fuzzy Logic for Social Simulation Using NetLogo. Journal of Artificial Societies and Social Simulation, 18(4), 1: http://jasss.soc.surrey.ac.uk/18/4/1.html. [doi:10.18564/jasss.2885]
+
+JIN, Y. (2003). Advanced Fuzzy Systems Design and Applications. Springer Science & Business Media. [doi:10.1007/978-3-7908-1771-3]
+
+JONES, H., Charnomordic, B., Dubois, D., & Guillaume, S. (2009). Practical Inference With Systems of Gradual Implicative Rules. IEEE Transactions on Fuzzy Systems, 17(1), 61–78.
+
+KLAWONNA, F., & Novák, V. (1996). The relation between inference and interpolation in the framework of fuzzy systems. Fuzzy Sets and Systems, 81(3), 331–354. [doi:10.1016/0165-0114(96)83710-9]
+
+KLIR, G. J., & Yuan, B. (1995). Fuzzy Sets and Fuzzy Logic: Theory and Applications. Upper Saddle River, New Jersey: Prentice Hall PTR.
+
+KOROL, T. (2012). Fuzzy Logic in Financial Management. In E. Dadios (Ed.), Fuzzy Logic - Emerging Technologies and Applications (pp. 259–286). InTech. [doi:10.5772/35574]
+
+LEE, K., Kim, S., Kim, C. O., & Park, T. (2013). An Agent-Based Competitive Product Diffusion Model for the Estimation and Sensitivity Analysis of Social Network Structure and Purchase Time Distribution. Journal of Artificial Societies and Social Simulation, 16 (1) 3: http://jasss.soc.surrey.ac.uk/16/1/3.html [doi:10.18564/jasss.2885]
+
+LEE, K., Lee, H., & Kim, C. O. (2014). Pricing and Timing Strategies for New Product Using Agent-Based Simulation of Behavioural Consumers. Journal of Artificial Societies and Social Simulation, 17 (2) 1: http://jasss.soc.surrey.ac.uk/17/2/1.html. [doi:10.18564/jasss.2080]
+
+LEEKWIJCK, W. Van, & Kerre, E. E. (1999). Defuzzification: criteria and classification. Fuzzy Sets and Systems, 108(2), 159–178.
+
+MAMDANI, E. H. (1974). Application of fuzzy algorithms for control of simple dynamic plant. Proceedings of the Institution of Electrical Engineers, 121(12), 1585. [doi:10.1049/piee.1974.0328]
+
+MAMDANI, E. H. (1976). Advances in the linguistic synthesis of fuzzy controllers. International Journal of Man-Machine Studies, 8(6), 669–678.
+
+MAMDANI, E. H. (1977). Application of Fuzzy Logic to Approximate Reasoning Using Linguistic Synthesis. IEEE Transactions on Computers, C-26(12), 1182–1191. [doi:10.1109/TC.1977.1674779]
+
+MAMDANI, E. H. (1994). Fuzzy Control. A Misconception of Theory and Application. IEEE Expert, 9(4), 27–28.
+
+MAMDANI, E. H., & Assilian, S. (1975). An experiment in linguistic synthesis with a fuzzy logic controller. International Journal of Man-Machine Studies, 7(1), 1–13. [doi:10.1016/S0020-7373(75)80002-2]
+
+MATLAB. (2016). Fuzzy Logic ToolboxTM User’s Guide R2016a. (The MathWorks, Ed.). The MathWorks.
+
+MORAGA, C. (2012). An Essay on the Interpretability of Mamdani Systems. In E. Trillas, P. P. Bonissone, L. Magdalena, & J. Kacprzyk (Eds.), Combining Experimentation and Theory SE - 5 (Vol. 271, pp. 61–72). Springer Berlin Heidelberg. [doi:10.1007/978-3-642-24666-1_5]
+
+NAIT-SAID, R., Zidani, F., & Ouzraoui, N. (2008). Fuzzy Risk Graph Model for Determining Safety Integrity Level. International Journal of Quality, Statistics, and Reliability, Article ID 263895.
+
+NEUMANN, M., Braun, A., Heinke, E.-M., Saqalli, M., & Srbljinovic, A. (2011). Challenges in Modelling Social Conflicts: Grappling with Polysemy. Journal of Artificial Societies and Social Simulation, 14 (3) 9: http://jasss.soc.surrey.ac.uk/14/3/9.html. [doi:10.18564/jasss.1818]
+
+NOVÁK, V. (1994). Fuzzy control from the logical point of view. Fuzzy Sets and Systems, 66(2), 159–173.
+
+NOVÁK, V. (2012). Reasoning about mathematical fuzzy logic and its future. Fuzzy Sets and Systems, 192, 25–44. [doi:10.1016/j.fss.2010.09.019]
+
+OLARU, D., & Smith, B. (2005). Modelling behavioural rules for daily activity scheduling using fuzzy logic. Transportation, 32(4), 423–441.
+
+PAL, S. K., & Mandal, D. P. (2015). Fuzzy Logic and Approximate Reasoning: An Overview. IETE Journal of Research, 37(5–6), 548–560.
+
+POWER, C. (2009). A Spatial Agent-Based Model of N-Person Prisoner’s Dilemma Cooperation in a Socio-Geographic Community. Journal of Artificial Societies and Social Simulation, 12 (1) 8: http://jasss.soc.surrey.ac.uk/12/1/8.html.
+
+RAGIN, C. C., & Pennings, P. (2005). Fuzzy Sets and Social Research. Sociological Methods & Research, 33(4), 423–430. [doi:10.1177/0049124105274499]
+
+ROSS, T. J. (2010). Fuzzy Logic with Engineering Applications (3rd ed.). Chichester, UK: John Wiley & Sons, Ltd.
+
+SABATER, J., Paolucci, M., & Conte, R. (2006). Repage: REPutation and ImAGE Among Limited Autonomous Partners. Journal of Artificial Societies and Social Simulation, 9 (2) 3: http://jasss.soc.surrey.ac.uk/9/2/3.html.
+
+SHANKAR, S., Thangarasu, S. K., Mohanraj, T., & Pravien, D. S. (2015). Prediction of cutting force in turning process: An experimental and fuzzy approach. Journal of Intelligent and Fuzzy Systems, 28(4), 1785–1793.
+
+SMETS, P., & Magrez, P. (1987). Implication in fuzzy logic. International Journal of Approximate Reasoning, 1(4), 327–347. [doi:10.1016/0888-613X(87)90023-5]
+
+SMITHSON, M. (1987). Fuzzy Set Analysis for Behavioral and Social Sciences. New York, NY: Springer New York.
+
+STOJIC, G. (2012). Using fuzzy logic for evaluating the level of countries’ (regions’) economic development. Panoeconomicus, 59(3), 293–310. [doi:10.2298/PAN1203293S]
+
+THIRUMOORTHI, P., & Yadaiah, N. (2015). Design of current source hybrid power filter for harmonic current compensation. Simulation Modelling Practice and Theory, 52, 78–91.
+
+VALDÉS-PASARÓN, S., Márquez, B. Y., & Gaxiola, L. (2011). Knowledge and Data Engineering for Analyzing the Quality of Education Using Fuzzy Logic. In Electrical Power Systems and Computers(pp. 567-573). Springer, Berlin, Heidelberg. [doi:10.1007/978-3-642-21747-0_71]
+
+WEST, J. E., & Linster, B. (2003). The Evolution of Fuzzy Rules as Strategies in Two-Player Games. Southern Economic Journal, 69(3), 705–717.
+
+WILENSKY, U. (1999). NetLogo. http://ccl.northwestern.edu/netlogo/. Center for Connected Learning and Computer-Based Modeling, Northwestern University. Evanston, IL.
+
+YANG, C. L., Huang, Y. C., Chang, Y. K., & Chu, C. P. (2015). Fuzzy intelligent inference scheme for self-health estimation via blood pressure and body mass index in out-of-hospital. Journal of Intelligent and Fuzzy Systems, 28(2), 775–786.
+
+ZADEH, L. A. (1965). Fuzzy sets. Information and Control, 8(3), 338–353. [doi:10.1016/S0019-9958(65)90241-X]
+
+ZIMMERMANN, H.-J. (2001). Fuzzy Set Theory—and Its Applications (4th ed.). Dordrecht: Springer Netherlands. 
