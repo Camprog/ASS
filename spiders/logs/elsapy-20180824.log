@@ -1,0 +1,132 @@
+2018-08-24 14:12:54,295 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:12:54,297 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:12:54,297 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:12:54,299 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:12:54,299 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:13:24,545 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:13:24,547 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:13:24,547 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:13:24,548 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:13:24,575 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:13:25,546 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/author/author_id/7004367821
+2018-08-24 14:13:26,842 - elsapy.elsentity - WARNING - HTTP 401 Error from https://api.elsevier.com/content/author/author_id/7004367821
+and using headers {'X-ELS-APIKey': '9b6fc59147caceaff0944b9259dec395', 'User-Agent': 'elsapy-v0.4.6', 'Accept': 'application/json'}:
+{"service-error":{"status":{"statusCode":"AUTHORIZATION_ERROR","statusText":"The requestor is not authorized to access the requested view or fields of the resource"}}}
+2018-08-24 14:13:27,844 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/affiliation/affiliation_id/60101411
+2018-08-24 14:13:29,015 - elsapy.elsentity - WARNING - HTTP 401 Error from https://api.elsevier.com/content/affiliation/affiliation_id/60101411
+and using headers {'X-ELS-APIKey': '9b6fc59147caceaff0944b9259dec395', 'User-Agent': 'elsapy-v0.4.6', 'Accept': 'application/json'}:
+{"service-error":{"status":{"statusCode":"AUTHORIZATION_ERROR","statusText":"The requestor is not authorized to access the requested view or fields of the resource"}}}
+2018-08-24 14:13:30,016 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/abstract/scopus_id/84872135457
+2018-08-24 14:13:31,325 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/abstract/scopus_id/84872135457
+2018-08-24 14:13:31,330 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/abstract/scopus_id/84872135457 to file
+2018-08-24 14:13:32,326 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:13:34,062 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:13:34,069 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/pii/S1674927814000082 to file
+2018-08-24 14:13:35,036 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:13:37,963 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:13:37,971 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5 to file
+2018-08-24 14:13:44,282 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/author/author_id/7004367821?view=documents
+2018-08-24 14:13:45,421 - elsapy.elsprofile - WARNING - ('HTTP 400 Error from https://api.elsevier.com/content/author/author_id/7004367821?view=documents\nand using headers {\'X-ELS-APIKey\': \'9b6fc59147caceaff0944b9259dec395\', \'User-Agent\': \'elsapy-v0.4.6\', \'Accept\': \'application/json\'}:\n{"service-error":{"status":{"statusCode":"INVALID_INPUT","statusText":"View parameter entered is not valid for this service"}}}',)
+2018-08-24 14:13:46,422 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/affiliation/affiliation_id/60101411?view=documents
+2018-08-24 14:13:48,119 - elsapy.elsprofile - WARNING - ('HTTP 400 Error from https://api.elsevier.com/content/affiliation/affiliation_id/60101411?view=documents\nand using headers {\'X-ELS-APIKey\': \'9b6fc59147caceaff0944b9259dec395\', \'User-Agent\': \'elsapy-v0.4.6\', \'Accept\': \'application/json\'}:\n{"service-error":{"status":{"statusCode":"INVALID_INPUT","statusText":"View parameter entered is not valid for this service"}}}',)
+2018-08-24 14:13:49,120 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/search/author?query=authlast(keuskamp)
+2018-08-24 14:15:57,372 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:15:57,373 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:15:57,374 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:15:57,375 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:15:57,375 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:15:58,373 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:16:00,435 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:16:00,466 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/pii/S1674927814000082 to file
+2018-08-24 14:16:01,435 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:16:03,226 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:16:03,234 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5 to file
+2018-08-24 14:16:22,594 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:16:22,595 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:16:22,596 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:16:22,597 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:16:22,598 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:16:23,595 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:16:25,124 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:17:29,789 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:17:29,791 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:17:29,791 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:17:29,792 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:17:29,794 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:17:32,067 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:17:33,932 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:17:33,938 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/pii/S1674927814000082 to file
+2018-08-24 14:17:34,933 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:17:36,912 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:17:36,916 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5 to file
+2018-08-24 14:17:40,282 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:17:40,283 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:17:40,284 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:17:40,285 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:17:40,285 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:17:42,562 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:17:44,480 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:17:44,486 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/pii/S1674927814000082 to file
+2018-08-24 14:17:45,480 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:17:47,351 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:17:47,361 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5 to file
+2018-08-24 14:20:29,989 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:20:29,991 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:20:29,991 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:20:29,992 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:20:29,994 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:20:32,374 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:20:33,806 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:20:33,813 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/pii/S1674927814000082 to file
+2018-08-24 14:20:34,806 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:20:37,406 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:20:37,413 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5 to file
+2018-08-24 14:20:48,675 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:20:48,676 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:20:48,677 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:20:48,677 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:20:48,678 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:20:50,934 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:20:52,730 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:21:12,867 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 14:21:12,868 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 14:21:12,868 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 14:21:12,869 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 14:21:12,870 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 14:21:15,478 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:21:17,102 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 14:21:17,136 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/pii/S1674927814000082 to file
+2018-08-24 14:21:18,103 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:21:20,123 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 14:21:20,131 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5 to file
+2018-08-24 16:27:24,358 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 16:27:24,360 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 16:27:24,360 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 16:27:24,362 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 16:27:24,363 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 16:27:27,118 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 16:27:30,489 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/pii/S1674927814000082
+2018-08-24 16:27:30,521 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/pii/S1674927814000082 to file
+2018-08-24 16:27:31,489 - elsapy.elsclient - INFO - Sending GET request to https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 16:27:36,277 - elsapy.elsentity - INFO - Data loaded for https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5
+2018-08-24 16:27:36,282 - elsapy.elsentity - INFO - Wrote https://api.elsevier.com/content/article/doi/10.1016/S1525-1578(10)60571-5 to file
+2018-08-24 16:36:52,779 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 16:36:52,780 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 16:36:52,780 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 16:36:52,781 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 16:36:52,782 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 16:37:21,808 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 16:37:21,809 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 16:37:21,809 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 16:37:21,810 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 16:37:21,811 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 16:39:28,083 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 16:39:28,084 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 16:39:28,085 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 16:39:28,086 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 16:39:28,087 - elsapy.elssearch - INFO - Module loaded.
+2018-08-24 16:40:00,943 - elsapy.elsclient - INFO - Module loaded.
+2018-08-24 16:40:00,945 - elsapy.elsentity - INFO - Module loaded.
+2018-08-24 16:40:00,945 - elsapy.elsprofile - INFO - Module loaded.
+2018-08-24 16:40:00,946 - elsapy.elsdoc - INFO - Module loaded.
+2018-08-24 16:40:00,947 - elsapy.elssearch - INFO - Module loaded.
