@@ -4,18 +4,19 @@ from nltk.corpus import stopwords
 import requests
 import scrapy
 from scrapy.crawler import CrawlerProcess
+from scrapy.http import HtmlResponse
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import Rule, CrawlSpider
 import nltk
 import io
-
 import numpy
 
 from scrapy.utils.project import get_project_settings
-from scrapy.selector import HtmlXPathSelector
+from scrapy.selector import HtmlXPathSelector, Selector
+
 
 #https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html
-# import pywin32
+#import pywin32
 # CD .\spiders
 # scrapy runspider scraping.py
 
@@ -40,7 +41,8 @@ class WebScraping(scrapy.Spider):
     def start_requests(self):
         print(self.start_urls)
         self.items = dict()
-        url = str(input("Index, enter n° : "))
+        #url = str(input("Index, enter n° : "))
+        url=0
         self.start_urls = self.start_urls[int(url)]
 
         """Give Domain with URL"""
@@ -54,22 +56,27 @@ class WebScraping(scrapy.Spider):
     def parse(self, response):
         # extract data from every links
         links = self.le1.extract_links(response)
-
-        for link in links:
-            self.items[link] = str(response.xpath('//body//p//text()').extract())
-
+        list_urls=[]
         #deep search
         if self.search == "deep":
-            stopWords = set(stopwords.words('english'))
-            print(stopWords)
             file = open('content.txt', 'w')
 
             """Body of article content"""
             for link in links:
-                self.items[link] = str(response.xpath('//body//p/text()').extract())
-                content=str(response.xpath('//body//p/text()').extract())
-                content = content.replace(u'\xa0', u' ')
-                file.write(str(content.encode('utf-8')))
+                print(link.url)
+                list_urls.append(link.url)
+                #content=Selector(response=response).xpath('//body//p/text()').extract()
+                #scrapy.Request(url=link.url, callback= self.parse2)
+            for link in list_urls:
+                a=link.xpath('//body//p/text()').extract()
+                print(a)
+                #self.items['url'] = link
+                #self.item['keyword'] = str(response.xpath('//div[@id="keywords"]/a/text()').extract())
+                #self.items['content'] = str(response.xpath('//body//p/text()').extract())
+                
+            for link in list_urls:
+                print(str(response.xpath('//body//p/text()').extract()))
+                #file.write(self.items[link.url])
             file.close()
 
         #basic search
@@ -79,10 +86,14 @@ class WebScraping(scrapy.Spider):
                 #print(link.url, link.text)
                 """ match URL with title and put them in a dict"""
                 if self.keyword in link.text.lower():
-                    self.items[link.url] = str(link.title)
-                    file.write(str(self.items[link.url]))
+                    self.items['url'] = str(link.title)
+                    file.write(str(self.items['url']))
 
             file.close()
+
+    def parse2(self, response):
+        print(str(response.xpath('//body//p/text()').extract()))
+
 
         # follow next page
         """
@@ -113,6 +124,9 @@ class WebScraping(scrapy.Spider):
         except:
             print("there isn't other page")
         """
+
+
+
 #Launch spider
 if __name__ == "__main__":
     process = CrawlerProcess()

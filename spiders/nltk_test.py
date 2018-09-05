@@ -1,19 +1,18 @@
-import finder as finder
 import ngram as ngram
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import numpy as np
+from scipy.sparse import csr_matrix
 from nltk.util import ngrams
-# nltk.download('all')
+#nltk.download('all')
 
 class Nltk():
     def __init__(self):
-
+        fullf = open('fullarticle.txt', 'rU')
         f = open('article.txt', 'rU')
         self.content = f.read()
         f.close()
-        fullf = open('fullarticle.txt', 'rU')
         self.fullcontent = fullf.read()
         self.stopWords = set(stopwords.words('english'))
         # stemming
@@ -38,10 +37,19 @@ class Nltk():
         filtered_word = [self.lemma.lemmatize(word) for word in filtered_word]
         wnl = WordNetLemmatizer()
         fdist = nltk.FreqDist(filtered_word)
+        print(filtered_word)
 
+        #mot + emplacement dans la matrice
         vocab_to_index = {word: i for i, word in enumerate(filtered_word)}
+        print(vocab_to_index)
+
+        #finder = bigram de la liste de mot
         finder = list(nltk.bigrams(filtered_word))
+        print(finder)
+
+        #bigram_freq est la list du bigram ainsi que la frequence
         bigram_freq = nltk.FreqDist(finder).most_common(len(finder))
+        print(len(filtered_word))
         co_occurrence_matrix = np.zeros((len(filtered_word), len(filtered_word)))
 
         for bigram in bigram_freq:
@@ -53,7 +61,7 @@ class Nltk():
             pos_previous = vocab_to_index[previous]
             co_occurrence_matrix[pos_current][pos_previous] = count
 
-        co_occurrence_matrix = np.matrix(co_occurrence_matrix)
+        co_occurrence_matrix = csr_matrix(np.matrix(co_occurrence_matrix))
         print(co_occurrence_matrix)
 
     def corpus(self, spliter):
