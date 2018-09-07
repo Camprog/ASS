@@ -50,7 +50,46 @@ class Nltk():
         #bigram_freq est la list du bigram ainsi que la frequence
         bigram_freq = nltk.FreqDist(finder).most_common(len(finder))
         print(len(filtered_word))
-        co_occurrence_matrix = np.zeros((len(filtered_word), len(filtered_word)))
+        print(len(bigram_freq))
+        indptr =[0]
+        indices=[]
+        data=[]
+        linedictionnary={}
+        for bigram in bigram_freq:
+            current = bigram[0][1]
+            previous = bigram[0][0]
+            count = bigram[1]
+
+            pos_current = vocab_to_index[current]
+            pos_previous = vocab_to_index[previous]
+
+            if pos_current in linedictionnary:
+
+                if pos_previous in linedictionnary[pos_current]:
+                    linedictionnary[pos_current][pos_previous] += count
+
+                else:
+                    linedictionnary[pos_current][pos_previous] = count
+            else:
+                linedictionnary[pos_current] = {pos_previous: count}
+
+        print("bigram : "+str(len(finder))+" bigramFrq : "+str(bigram_freq)+" Number of lemma : "+str(len(filtered_word))+" with "+str(len(linedictionnary))+" bigrammed lemma")
+        nb = 0
+        for i, j in enumerate(filtered_word):
+            try:
+                nb += 1
+                if linedictionnary[i]:
+                    indptr.append(linedictionnary[i])
+                    for item in linedictionnary.items():
+                        indices.append(item.key)
+                        data.append(item.value)
+                if nb % (len(filtered_word) / 10) == 0:
+                    print(len(filtered_word)/nb+"% have been made")
+            except:
+                pass
+
+        """
+        co_occurrence_matrix = csr_matrix((len(filtered_word), len(filtered_word)))
 
         for bigram in bigram_freq:
             current = bigram[0][1]
@@ -61,9 +100,8 @@ class Nltk():
             pos_previous = vocab_to_index[previous]
             co_occurrence_matrix[pos_current][pos_previous] = count
 
-        co_occurrence_matrix = csr_matrix(np.matrix(co_occurrence_matrix))
         print(co_occurrence_matrix)
-
+        """
     def corpus(self, spliter):
         matrix = []
         filtered_word = self.fullcontent.split(spliter)

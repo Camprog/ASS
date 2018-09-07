@@ -1,24 +1,17 @@
 # -*- coding: utf-8 -*-
 from urllib.parse import urlparse
-from nltk.corpus import stopwords
+from urllib.parse import unquote
 import requests
 import scrapy
+from scrapy import item
 from scrapy.crawler import CrawlerProcess
 from scrapy.http import HtmlResponse
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import Rule, CrawlSpider
-import nltk
-import io
-import numpy
-
 from scrapy.utils.project import get_project_settings
 from scrapy.selector import HtmlXPathSelector, Selector
 
-
-#https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html
 #import pywin32
-# CD .\spiders
-# scrapy runspider scraping.py
 
 class WebScraping(scrapy.Spider):
     name = "scraping"
@@ -32,7 +25,7 @@ class WebScraping(scrapy.Spider):
             callback="parse_items"
         )
     ]
-
+    list_urls = []
     def __init__(self, keyword, search):
         self.keyword = keyword
         self.search = search
@@ -56,28 +49,15 @@ class WebScraping(scrapy.Spider):
     def parse(self, response):
         # extract data from every links
         links = self.le1.extract_links(response)
-        list_urls=[]
+
         #deep search
         if self.search == "deep":
-            file = open('content.txt', 'w')
-
             """Body of article content"""
             for link in links:
                 print(link.url)
-                list_urls.append(link.url)
-                #content=Selector(response=response).xpath('//body//p/text()').extract()
-                #scrapy.Request(url=link.url, callback= self.parse2)
-            for link in list_urls:
-                a=link.xpath('//body//p/text()').extract()
-                print(a)
-                #self.items['url'] = link
-                #self.item['keyword'] = str(response.xpath('//div[@id="keywords"]/a/text()').extract())
-                #self.items['content'] = str(response.xpath('//body//p/text()').extract())
-                
-            for link in list_urls:
-                print(str(response.xpath('//body//p/text()').extract()))
-                #file.write(self.items[link.url])
-            file.close()
+                WebScraping.list_urls.append(str(link.url))
+
+            process.crawl(scraping_content)
 
         #basic search
         else:
@@ -91,41 +71,37 @@ class WebScraping(scrapy.Spider):
 
             file.close()
 
-    def parse2(self, response):
-        print(str(response.xpath('//body//p/text()').extract()))
+class scraping_content(scrapy.Spider):
+    name = "scraping_content"
+    start_urls = WebScraping.list_urls
+    items = []
+    le1 = LinkExtractor(canonicalize=True, unique=False)
+    rules = [
+        Rule(
+            le1,
+            follow=True,
+            callback="parse_items"
+        )
+    ]
+    def start_requests(self):
 
+        for url in self.start_urls:
+            yield scrapy.Request(url=url, callback=self.parsing)
 
-        # follow next page
-        """
-        try:
-            #this response use css, only for comses.net /// Change page-item to adapt
-            #next_page = response.css('li.page-item a::attr("href")').extract()[-1]
+        file = open('content.txt', 'w')
 
-            a = input("Enter Class name : ")
-            #a="xXx.button.button-primary.button-right"
-            next_page_req = response.xpath('.//a[@class="' + a + '"]/@href').extract()[-1]
-            print("page suivante : ", next_page_req)
+        for i in self.items:
+            i = i.replace(u'\xa0', u' ')
+            i = i.replace(u'\r', u'')
+            i = i.replace(u'\n ', u'')
+            #encode ou decode?
+            file.write(str(i.encode('utf-8')))
+        file.close()
+    def parsing(self, response):
 
-            next_page = self.start_urls + next_page_req
-            r = requests.get(next_page)
-
-            if r.status_code != 200:
-                next_page = "https://" + self.domain + next_page_req
-
-                if requests.get(next_page).status_code != 200:
-                    next_page = next_page_req
-
-                    if requests.get(next_page).status_code != 200:
-                        next_page = "http://" + self.domain + next_page_req
-
-
-            yield response.follow(next_page, self.parse)
-
-        except:
-            print("there isn't other page")
-        """
-
-
+        #self.item['keyword'] = str(response.xpath('//div[@id="keywords"]/a/text()').extract())
+        #self.item['content'] = str(response.xpath('//body//p/text()').extract())
+        self.items.append(str(response.xpath('//body//p/text()').extract()))
 
 #Launch spider
 if __name__ == "__main__":
@@ -133,3 +109,34 @@ if __name__ == "__main__":
     """keyword to do a keyword search,search=deep to a deep search"""
     process.crawl(WebScraping, keyword="", search="deep")
     process.start()
+
+
+# follow next page
+"""
+try:
+    #this response use css, only for comses.net /// Change page-item to adapt
+    #next_page = response.css('li.page-item a::attr("href")').extract()[-1]
+
+    a = input("Enter Class name : ")
+    #a="xXx.button.button-primary.button-right"
+    next_page_req = response.xpath('.//a[@class="' + a + '"]/@href').extract()[-1]
+    print("page suivante : ", next_page_req)
+
+    next_page = self.start_urls + next_page_req
+    r = requests.get(next_page)
+
+    if r.status_code != 200:
+        next_page = "https://" + self.domain + next_page_req
+
+        if requests.get(next_page).status_code != 200:
+            next_page = next_page_req
+
+            if requests.get(next_page).status_code != 200:
+                next_page = "http://" + self.domain + next_page_req
+
+
+    yield response.follow(next_page, self.parse)
+
+except:
+    print("there isn't other page")
+"""
