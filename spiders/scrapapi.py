@@ -10,14 +10,15 @@ import json
 """
 example requests : http://api.plos.org/search?q=title:"Drosophila" AND body:"RNA"&fl=id,abstract
 field list : http://api.plos.org/solr/search-fields/
-Science direct Key : 9b6fc59147caceaff0944b9259dec395
+Science direct Key : XXXX
 """
 class ScrapingApi():
     def __init__(self, api, keyword, feature):
         self.url=api
         self.keyword=keyword
         self.feature=feature
-
+        
+        #define which API we want to make requests
         if api == "plosone":
             self.url = 'http://api.plos.org'
             ScrapingApi.plosone()
@@ -30,18 +31,21 @@ class ScrapingApi():
         if self.feature=="deep":
             response = requests.get(self.url)
             if response.status_code == 200:
+                #requests which return html content of articles
                 self.url = self.url+"/search?q=everything:'"+self.keyword+"'"
                 resp = requests.get(self.url)
                 print (resp.text)
         else:
             response = requests.get(self.url)
             if response.status_code == 200:
+                #request which return abstract article thanks to keyword in HTML format
                 self.url = self.url + "/search?q=abstract:'" + self.keyword + "'"
                 resp = requests.get(self.url)
                 print(resp.text)
-
+    
+    #this part doesn't return something usefull, need to change requests
     def science_direct(self):
-        payload={'APIKey': "9b6fc59147caceaff0944b9259dec395"}
+        payload={'APIKey': "NEED_TO_REPLACE_BY_SCIENCEDIRECTKEY"}
         response=requests.get("http://api.elsevier.com/content/search/scopus?query=KEY%28agent-based%29", payload)
 
         ## Load configuration
